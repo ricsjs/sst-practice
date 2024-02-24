@@ -13,6 +13,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Admin {
+  id String @id @default(uuid())
+
+  @@map("admins")
+}
+
+model Customer {
+  id String @id @default(uuid())
+
+  @@map("clientes")
+}
+
+model Card {
+  id String @id @default(uuid())
+
+  @@map("cards")
+}
+
+model Enchiridion {
+  id String @id @default(uuid())
+
+  @@map("prontuarios")
+}
+
 model User {
   id    String @id @default(uuid())
   name  String
