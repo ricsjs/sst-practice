@@ -36,11 +36,3 @@ model Enchiridion {
 
   @@map("prontuarios")
 }
-
-model User {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
-
-  @@map("users")
-}
