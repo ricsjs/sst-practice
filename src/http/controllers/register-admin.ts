@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { prisma } from "../../lib/prisma"
+import { RegisterAdminService } from "../../services/register-admin"
+import { PrismaAdminsRepository } from "../../repositories/prisma-admins-repository"
 
 export async function registerAdmin(request: FastifyRequest, reply: FastifyReply) {
     const registerAdminSchema = z.object({
@@ -11,13 +12,18 @@ export async function registerAdmin(request: FastifyRequest, reply: FastifyReply
 
     const { name, email, password } = registerAdminSchema.parse(request.body)
 
-    await prisma.admin.create({
-        data: {
-            name,
+    try {
+        const prismaAdminsRepository = new PrismaAdminsRepository
+        const registerAdminService = new RegisterAdminService(prismaAdminsRepository)
+
+        await registerAdminService.execute({
+            name, 
             email,
-            password_hash: password
-        }
-    })
+            password
+        })
+    } catch (error) {
+        return reply.status(409).send()
+    }
 
     return reply.status(201).send()
 }
