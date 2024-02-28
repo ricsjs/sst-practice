@@ -12,7 +12,7 @@ interface AdminAuthenticateServiceResponse {
     admin: Admin
 }
 
-export class AdminAuthenticate {
+export class AdminAuthenticateService {
     constructor(
         private adminsRepository: AdminsRepository
     ) {}
