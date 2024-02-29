@@ -4,18 +4,28 @@ import { AdminsRepository } from "../admins-repository";
 export class InMemoryAdminsRepository implements AdminsRepository {
     public items: Admin[] = []
 
-    async findByEmail(email: string) {
-        const user = this.items.find((item) => item.email === email)
+    async findById(id: string) {
+        const admin = this.items.find((item) => item.id === id)
 
-        if (!user) {
+        if (!admin) {
             return null
         }
 
-        return user
+        return admin
+    }
+
+    async findByEmail(email: string) {
+        const admin = this.items.find((item) => item.email === email)
+
+        if (!admin) {
+            return null
+        }
+
+        return admin
     }
 
     async create(data: Prisma.AdminCreateInput) {
-        const user = {
+        const admin = {
             id: 'user-1',
             name: data.name,
             email: data.email,
@@ -23,7 +33,7 @@ export class InMemoryAdminsRepository implements AdminsRepository {
             created_at: new Date()
         }
 
-        this.items.push(user)
-        return user
+        this.items.push(admin)
+        return admin
     }
 }
