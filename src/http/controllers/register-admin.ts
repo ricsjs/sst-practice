@@ -1,8 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { RegisterAdminService } from "../../services/register-admin"
+import { RegisterAdminService } from "../../services/admin-register"
 import { PrismaAdminsRepository } from "../../repositories/prisma/prisma-admins-repository"
 import { AdminAlreadyExistsError } from "../../services/errors/admin-already-exists-error"
+import { makeAdminRegisterService } from "../../services/factories/make-admin-register-service"
 
 export async function registerAdmin(request: FastifyRequest, reply: FastifyReply) {
     const registerAdminSchema = z.object({
@@ -14,8 +15,8 @@ export async function registerAdmin(request: FastifyRequest, reply: FastifyReply
     const { name, email, password } = registerAdminSchema.parse(request.body)
 
     try {
-        const prismaAdminsRepository = new PrismaAdminsRepository
-        const registerAdminService = new RegisterAdminService(prismaAdminsRepository)
+        
+        const registerAdminService = makeAdminRegisterService()
 
         await registerAdminService.execute({
             name,

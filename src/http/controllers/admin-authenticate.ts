@@ -3,6 +3,7 @@ import { z } from "zod"
 import { PrismaAdminsRepository } from "../../repositories/prisma/prisma-admins-repository"
 import { AdminAuthenticateService } from "../../services/admin-authenticate"
 import { InvalidCredentialError } from "../../services/errors/invalid-credential-error"
+import { makeAdminAuthenticateService } from "../../services/factories/make-admin-authenticate-service"
 
 export async function authenticateAdmin(request: FastifyRequest, reply: FastifyReply) {
     const authenticateAdminBodySchema = z.object({
@@ -13,8 +14,8 @@ export async function authenticateAdmin(request: FastifyRequest, reply: FastifyR
     const { email, password } = authenticateAdminBodySchema.parse(request.body)
 
     try {
-        const prismaAdminsRepository = new PrismaAdminsRepository
-        const authenticateAdminService = new AdminAuthenticateService(prismaAdminsRepository)
+        
+        const authenticateAdminService = makeAdminAuthenticateService()
 
         await authenticateAdminService.execute({
             email,

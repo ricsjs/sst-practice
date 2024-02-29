@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { RegisterAdminService } from './register-admin'
+import { RegisterAdminService } from './admin-register'
 import { compare } from 'bcryptjs'
 import { InMemoryAdminsRepository } from '../repositories/in-memory/in-memory-admins-repository'
 import { AdminAlreadyExistsError } from './errors/admin-already-exists-error'
