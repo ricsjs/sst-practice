@@ -3,13 +3,19 @@ import { RegisterAdminService } from './register-admin'
 import { compare } from 'bcryptjs'
 import { InMemoryAdminsRepository } from '../repositories/in-memory/in-memory-admins-repository'
 import { AdminAlreadyExistsError } from './errors/admin-already-exists-error'
+import { beforeEach } from 'vitest'
+
+let adminsRepository: InMemoryAdminsRepository
+let sut: RegisterAdminService
 
 describe('Register Admin Service', () => {
+    beforeEach(() => {
+        adminsRepository = new InMemoryAdminsRepository
+        sut = new RegisterAdminService(adminsRepository)
+    })
+    
     it('should be able to register', async () => {
-        const adminsRepository = new InMemoryAdminsRepository
-        const registerService = new RegisterAdminService(adminsRepository)
-
-        const { user } = await registerService.execute({
+        const { user } = await sut.execute({
             name: 'Ricardo Alencar',
             email: 'ricfilho@gmail.com',
             password: '123456'
@@ -19,10 +25,7 @@ describe('Register Admin Service', () => {
     })
 
     it('should hash admin password upon registration', async () => {
-        const adminsRepository = new InMemoryAdminsRepository
-        const registerAdminService = new RegisterAdminService(adminsRepository)
-
-        const { user } = await registerAdminService.execute({
+        const { user } = await sut.execute({
             name: 'Ricardo Alencar',
             email: 'ricfilho@gmail.com',
             password: '123456'
@@ -37,19 +40,16 @@ describe('Register Admin Service', () => {
     })
 
     it('should not be able to register with same email twice', async () => {
-        const adminsRepository = new InMemoryAdminsRepository
-        const registerAdminService = new RegisterAdminService(adminsRepository)
-
         const email = 'ricfilho0007@gmail.com'
 
-        await registerAdminService.execute({
+        await sut.execute({
             name: 'Ricardo Alencar',
             email,
             password: '123456'
         })
 
-        await expect(() => 
-            registerAdminService.execute({
+        await expect(() =>
+            sut.execute({
                 name: 'Ricardo',
                 email,
                 password: '123456'

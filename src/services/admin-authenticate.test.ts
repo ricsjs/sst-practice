@@ -3,12 +3,17 @@ import { InMemoryAdminsRepository } from '../repositories/in-memory/in-memory-ad
 import { AdminAuthenticateService } from './admin-authenticate'
 import { hash } from 'bcryptjs'
 import { InvalidCredentialError } from './errors/invalid-credential-error'
+import { beforeEach } from 'vitest'
+
+let adminsRepository: InMemoryAdminsRepository
+let sut: AdminAuthenticateService
 
 describe('Register Admin Service', () => {
+    beforeEach(() => {
+        adminsRepository = new InMemoryAdminsRepository
+        sut = new AdminAuthenticateService(adminsRepository)
+    })
     it('should be able to authenticate', async () => {
-        const adminsRepository = new InMemoryAdminsRepository
-        const sut = new AdminAuthenticateService(adminsRepository)
-
         await adminsRepository.create({
             name: 'John Doe',
             email: 'ricfilho@gmail.com',
@@ -24,9 +29,6 @@ describe('Register Admin Service', () => {
     })
 
     it('should not be able to authenticate with wrong email', async () => {
-        const adminsRepository = new InMemoryAdminsRepository
-        const sut = new AdminAuthenticateService(adminsRepository)
-
         expect(() =>
             sut.execute({
                 email: 'ricfilho@gmail.com',
@@ -35,9 +37,6 @@ describe('Register Admin Service', () => {
     })
 
     it('should not be able to authenticate with wrong password', async () => {
-        const adminsRepository = new InMemoryAdminsRepository
-        const sut = new AdminAuthenticateService(adminsRepository)
-
         await adminsRepository.create({
             name: 'John Doe',
             email: 'ricfilho@gmail.com',
