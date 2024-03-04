@@ -1,7 +1,7 @@
 import { Empresa } from "@prisma/client";
 import { InvalidCredentialError } from "../errors/invalid-credential-error";
 import { compare } from "bcryptjs";
-import { CompaniesRepository } from "../../repositories/companies-repository";
+import { CompaniesRepository } from "../../repositories/company-repositories/companies-repository";
 
 interface CompanyAuthenticateServiceRequest {
     email: string

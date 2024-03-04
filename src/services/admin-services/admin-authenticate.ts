@@ -1,5 +1,5 @@
 import { Admin } from "@prisma/client";
-import { AdminsRepository } from "../../repositories/admins-repository";
+import { AdminsRepository } from "../../repositories/admin-repositories/admins-repository";
 import { InvalidCredentialError } from "../errors/invalid-credential-error";
 import { compare } from "bcryptjs";
 

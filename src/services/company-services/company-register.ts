@@ -1,5 +1,5 @@
 import { Empresa } from "@prisma/client"
-import { CompaniesRepository } from "../../repositories/companies-repository"
+import { CompaniesRepository } from "../../repositories/company-repositories/companies-repository"
 import { hash } from "bcryptjs"
 import { UserAlreadyExistsError } from "../errors/user-already-exists-error"
 

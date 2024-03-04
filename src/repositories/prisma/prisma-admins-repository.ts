@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma"
 import { Admin, Prisma } from "@prisma/client"
-import { AdminsRepository } from "../admins-repository"
+import { AdminsRepository } from "../admin-repositories/admins-repository"
 
 export class PrismaAdminsRepository implements AdminsRepository {
     findById(id: string): Promise<Admin | null> {

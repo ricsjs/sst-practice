@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma"
 import { Empresa, Prisma } from "@prisma/client"
-import { CompaniesRepository } from "../companies-repository"
+import { CompaniesRepository } from "../company-repositories/companies-repository"
 
 export class PrismaCompaniesRepository implements CompaniesRepository {
     findById(id: string): Promise<Empresa | null> {

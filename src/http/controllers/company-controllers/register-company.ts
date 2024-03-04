@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { makeCompanyRegisterService } from "../../services/factories/make-company-register-service"
-import { UserAlreadyExistsError } from "../../services/errors/user-already-exists-error"
+import { makeCompanyRegisterService } from "../../../services/factories/company-factories/make-company-register-service"
+import { UserAlreadyExistsError } from "../../../services/errors/user-already-exists-error"
 
 export async function registerCompany(request: FastifyRequest, reply: FastifyReply) {
     const registerCompanySchema = z.object({

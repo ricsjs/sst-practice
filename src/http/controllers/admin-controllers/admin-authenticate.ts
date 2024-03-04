@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { InvalidCredentialError } from "../../services/errors/invalid-credential-error"
-import { makeAdminAuthenticateService } from "../../services/factories/make-admin-authenticate-service"
+import { InvalidCredentialError } from "../../../services/errors/invalid-credential-error"
+import { makeAdminAuthenticateService } from "../../../services/factories/admin-factories/make-admin-authenticate-service"
 
 export async function authenticateAdmin(request: FastifyRequest, reply: FastifyReply) {
     const authenticateAdminBodySchema = z.object({

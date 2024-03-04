@@ -1,5 +1,5 @@
 import { Admin, Prisma } from "@prisma/client";
-import { AdminsRepository } from "../admins-repository";
+import { AdminsRepository } from "../admin-repositories/admins-repository";
 
 export class InMemoryAdminsRepository implements AdminsRepository {
     public items: Admin[] = []
