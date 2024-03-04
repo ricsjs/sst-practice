@@ -1,6 +1,5 @@
 import { hash } from "bcryptjs"
 import { AdminsRepository } from "../repositories/admins-repository"
-import { throws } from "assert"
 import { AdminAlreadyExistsError } from "./errors/admin-already-exists-error"
 import { Admin } from "@prisma/client"
 

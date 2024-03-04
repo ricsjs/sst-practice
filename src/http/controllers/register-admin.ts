@@ -1,7 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { RegisterAdminService } from "../../services/admin-register"
-import { PrismaAdminsRepository } from "../../repositories/prisma/prisma-admins-repository"
 import { AdminAlreadyExistsError } from "../../services/errors/admin-already-exists-error"
 import { makeAdminRegisterService } from "../../services/factories/make-admin-register-service"
 
