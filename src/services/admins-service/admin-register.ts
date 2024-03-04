@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs"
-import { AdminsRepository } from "../repositories/admins-repository"
-import { AdminAlreadyExistsError } from "./errors/admin-already-exists-error"
 import { Admin } from "@prisma/client"
+import { AdminsRepository } from "../../repositories/admins-repository"
+import { UserAlreadyExistsError } from "../errors/user-already-exists-error"
 
 interface RegisterAdminServiceRequest {
     name: string,
@@ -24,7 +24,7 @@ export class RegisterAdminService {
         const adminWithSameEmail = await this.adminsRepository.findByEmail(email)
     
         if (adminWithSameEmail) {
-            throw new AdminAlreadyExistsError()
+            throw new UserAlreadyExistsError()
         }
         
         const user = await this.adminsRepository.create({

@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import { InMemoryAdminsRepository } from '../repositories/in-memory/in-memory-admins-repository'
+import { InMemoryAdminsRepository } from '../../repositories/in-memory/in-memory-admins-repository'
 import { hash } from 'bcryptjs'
-import { InvalidCredentialError } from './errors/invalid-credential-error'
+import { InvalidCredentialError } from '../errors/invalid-credential-error'
 import { beforeEach } from 'vitest'
 import { GetAdminProfileService } from './get-admin-profile'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 let adminsRepository: InMemoryAdminsRepository
 let sut: GetAdminProfileService

@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import { RegisterAdminService } from './admin-register'
 import { compare } from 'bcryptjs'
-import { InMemoryAdminsRepository } from '../repositories/in-memory/in-memory-admins-repository'
-import { AdminAlreadyExistsError } from './errors/admin-already-exists-error'
+import { InMemoryAdminsRepository } from '../../repositories/in-memory/in-memory-admins-repository'
 import { beforeEach } from 'vitest'
+import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
 
 let adminsRepository: InMemoryAdminsRepository
 let sut: RegisterAdminService
@@ -54,6 +54,6 @@ describe('Register Admin Service', () => {
                 email,
                 password: '123456'
             })
-        ).rejects.toBeInstanceOf(AdminAlreadyExistsError)
+        ).rejects.toBeInstanceOf(UserAlreadyExistsError)
     })
 })

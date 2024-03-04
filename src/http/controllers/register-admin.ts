@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { AdminAlreadyExistsError } from "../../services/errors/admin-already-exists-error"
+import { UserAlreadyExistsError } from "../../services/errors/user-already-exists-error"
 import { makeAdminRegisterService } from "../../services/factories/make-admin-register-service"
 
 export async function registerAdmin(request: FastifyRequest, reply: FastifyReply) {
@@ -22,7 +22,7 @@ export async function registerAdmin(request: FastifyRequest, reply: FastifyReply
             password
         })
     } catch (error) {
-        if (error instanceof AdminAlreadyExistsError) {
+        if (error instanceof UserAlreadyExistsError) {
             return reply.status(409).send({ message: error.message })
         }
 

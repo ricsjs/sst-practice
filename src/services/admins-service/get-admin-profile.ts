@@ -1,6 +1,6 @@
 import { Admin } from "@prisma/client";
-import { AdminsRepository } from "../repositories/admins-repository";
-import { ResourceNotFoundError } from "./errors/resource-not-found-error";
+import { AdminsRepository } from "../../repositories/admins-repository";
+import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 interface GetAdminProfileServiceServiceRequest {
     userId: string
