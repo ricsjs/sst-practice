@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { RegisterAdminService } from './admin-register'
+import { RegisterAdminService } from './create-register'
 import { compare } from 'bcryptjs'
 import { InMemoryAdminsRepository } from '../../repositories/in-memory/in-memory-admins-repository'
 import { beforeEach } from 'vitest'

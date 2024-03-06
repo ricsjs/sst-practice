@@ -3,7 +3,7 @@ import { CompaniesRepository } from "../../repositories/company-repositories/com
 import { hash } from "bcryptjs"
 import { UserAlreadyExistsError } from "../errors/user-already-exists-error"
 
-interface CompanyRegisterServiceRequest {
+interface CreateCompanyServiceRequest {
     cnpj: string,
     corporate_reason: string,
     fantasy_name: string,
@@ -17,16 +17,16 @@ interface CompanyRegisterServiceRequest {
     password: string
 }
 
-interface CompanyRegisterServiceResponse {
+interface CreateCompanyServiceResponse {
     user: Empresa
 }
 
-export class CompanyRegisterService {
+export class CreateCompanyService {
     constructor(private companiesRepository: CompaniesRepository) {}
 
     async execute({
         cnpj, corporate_reason, fantasy_name, identification, cep, address, neighborhood, phone, dt_start_esocial, email, password 
-    }: CompanyRegisterServiceRequest): Promise<CompanyRegisterServiceResponse> {
+    }: CreateCompanyServiceRequest): Promise<CreateCompanyServiceResponse> {
         const password_hash = await hash(password, 6)
 
         const companyWithSameEmail = await this.companiesRepository.findByEmail(email)

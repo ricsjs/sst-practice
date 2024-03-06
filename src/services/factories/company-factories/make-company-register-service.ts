@@ -1,9 +1,9 @@
 import { PrismaCompaniesRepository } from "../../../repositories/prisma/prisma-companies-repository"
-import { CompanyRegisterService } from "../../company-services/company-register"
+import { CreateCompanyService } from "../../company-services/create-company"
 
-export function makeCompanyRegisterService() {
+export function makeCreateCompanyService() {
     const prismaCompaniesRepository = new PrismaCompaniesRepository
-    const registerCompanyService = new CompanyRegisterService(prismaCompaniesRepository)
+    const createCompanyService = new CreateCompanyService(prismaCompaniesRepository)
 
-    return registerCompanyService
+    return createCompanyService
 }

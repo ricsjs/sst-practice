@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { makeCompanyRegisterService } from "../../../services/factories/company-factories/make-company-register-service"
+import { makeCreateCompanyService } from "../../../services/factories/company-factories/make-company-register-service"
 import { UserAlreadyExistsError } from "../../../services/errors/user-already-exists-error"
 
-export async function registerCompany(request: FastifyRequest, reply: FastifyReply) {
-    const registerCompanySchema = z.object({
+export async function createCompany(request: FastifyRequest, reply: FastifyReply) {
+    const createCompanySchema = z.object({
         cnpj: z.string(),
         corporate_reason: z.string(),
         fantasy_name: z.string(),
@@ -18,12 +18,24 @@ export async function registerCompany(request: FastifyRequest, reply: FastifyRep
         password: z.string().min(6)
     })
 
-    const { cnpj, corporate_reason, fantasy_name, identification, cep, address, neighborhood, phone, dt_start_esocial, email, password } = registerCompanySchema.parse(request.body)
+    const {
+        cnpj,
+        corporate_reason,
+        fantasy_name,
+        identification,
+        cep,
+        address,
+        neighborhood,
+        phone,
+        dt_start_esocial,
+        email,
+        password
+    } = createCompanySchema.parse(request.body)
 
     try {
-        const registerCompanyService = makeCompanyRegisterService()
+        const createCompanyService = makeCreateCompanyService()
 
-        await registerCompanyService.execute({
+        await createCompanyService.execute({
             cnpj,
             corporate_reason,
             fantasy_name,
