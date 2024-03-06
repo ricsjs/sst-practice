@@ -13,7 +13,7 @@ interface CreateAdminServiceResponse {
     user: Admin
 }
 
-export class RegisterAdminService {
+export class CreateAdminService {
     constructor(private adminsRepository: AdminsRepository) {}
 
     async execute({

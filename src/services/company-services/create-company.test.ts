@@ -3,15 +3,15 @@ import { compare } from 'bcryptjs'
 import { beforeEach } from 'vitest'
 import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
 import { InMemoryCompaniesRepository } from '../../repositories/in-memory/in-memory-companies-repository'
-import { CompanyRegisterService } from './create-company'
+import { CreateCompanyService } from './create-company'
 
 let companiesRepository: InMemoryCompaniesRepository
-let sut: CompanyRegisterService
+let sut: CreateCompanyService
 
 describe('Register Company Service', () => {
     beforeEach(() => {
         companiesRepository = new InMemoryCompaniesRepository
-        sut = new CompanyRegisterService(companiesRepository)
+        sut = new CreateCompanyService(companiesRepository)
     })
 
     it('should be able to register', async () => {

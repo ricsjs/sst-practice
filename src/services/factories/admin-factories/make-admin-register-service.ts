@@ -1,5 +1,5 @@
 import { PrismaAdminsRepository } from "../../../repositories/prisma/prisma-admins-repository"
-import { RegisterAdminService } from "../../admin-services/create-register"
+import { RegisterAdminService } from "../../admin-services/create-admin"
 
 export function makeCreateAdminService() {
     const prismaAdminsRepository = new PrismaAdminsRepository
