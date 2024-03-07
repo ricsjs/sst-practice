@@ -1,8 +1,8 @@
 import { hash } from "bcryptjs"
 import { Admin } from "@prisma/client"
-import { AdminsRepository } from "../../repositories/admin-repositories/admins-repository"
+import { AdminsRepository } from "../../repositories/admins-repository"
 import { UserAlreadyExistsError } from "../errors/user-already-exists-error"
-import { UsersRepository } from "../../repositories/user-repositories/users-repository"
+import { UsersRepository } from "../../repositories/users-repository"
 
 interface CreateAdminServiceRequest {
     name: string,

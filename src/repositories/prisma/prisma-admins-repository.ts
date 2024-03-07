@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma"
 import { Admin, Prisma } from "@prisma/client"
-import { AdminsRepository } from "../admin-repositories/admins-repository"
+import { AdminsRepository } from "../admins-repository"
 
 export class PrismaAdminsRepository implements AdminsRepository {
     async create(data: Prisma.AdminCreateInput) {
