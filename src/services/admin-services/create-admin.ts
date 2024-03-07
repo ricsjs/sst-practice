@@ -2,6 +2,7 @@ import { hash } from "bcryptjs"
 import { Admin } from "@prisma/client"
 import { AdminsRepository } from "../../repositories/admin-repositories/admins-repository"
 import { UserAlreadyExistsError } from "../errors/user-already-exists-error"
+import { UsersRepository } from "../../repositories/user-repositories/users-repository"
 
 interface CreateAdminServiceRequest {
     name: string,
@@ -10,31 +11,41 @@ interface CreateAdminServiceRequest {
 }
 
 interface CreateAdminServiceResponse {
-    user: Admin
+    admin: Admin
 }
 
 export class CreateAdminService {
-    constructor(private adminsRepository: AdminsRepository) {}
+    constructor(
+        private adminsRepository: AdminsRepository,
+        private usersRepository: UsersRepository
+    ) { }
 
     async execute({
         name, email, password
     }: CreateAdminServiceRequest): Promise<CreateAdminServiceResponse> {
         const password_hash = await hash(password, 6)
-    
-        const adminWithSameEmail = await this.adminsRepository.findByEmail(email)
-    
-        if (adminWithSameEmail) {
+
+        const userWithSameEmail = await this.usersRepository.findByEmail(email)
+
+        if (userWithSameEmail) {
             throw new UserAlreadyExistsError()
         }
-        
-        const user = await this.adminsRepository.create({
-            name,
+
+        const userType = "admin"
+
+        const user = await this.usersRepository.create({
             email,
-            password_hash
+            password_hash,
+            type: userType
+        })
+
+        const admin = await this.adminsRepository.create({
+            name,
+            user: { connect: { id: user.id } }
         })
 
         return {
-            user
+            admin
         }
     }
 }
