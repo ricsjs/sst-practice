@@ -1,9 +1,9 @@
 import { FastifyInstance } from "fastify";
 import { createAdmin } from "./controllers/admin-controllers/create-admin";
-import { authenticateAdmin } from "./controllers/admin-controllers/admin-authenticate";
+import { authenticateUser } from "./controllers/user-authenticate";
 
 export async function appRoutes(app: FastifyInstance) {
     app.post('/admins', createAdmin)
 
-    app.post('/admin_login', authenticateAdmin)
+    app.post('/login', authenticateUser)
 }

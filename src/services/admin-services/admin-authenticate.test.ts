@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { InMemoryAdminsRepository } from '../../repositories/in-memory/in-memory-admins-repository'
-import { AdminAuthenticateService } from './admin-authenticate'
+import { AdminAuthenticateService } from '../user-services/user-authenticate'
 import { hash } from 'bcryptjs'
 import { InvalidCredentialError } from '../errors/invalid-credential-error'
 import { beforeEach } from 'vitest'
