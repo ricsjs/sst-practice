@@ -52,8 +52,6 @@ model Empresa {
   phone            String
   dt_start_esocial DateTime
   employee         Empregado[]
-  email            String      @unique
-  password_hash    String
 
   @@map("empresas")
 }
@@ -67,18 +65,16 @@ model Empregado {
   company   Empresa @relation(fields: [companyId], references: [id])
   companyId String
 
-  name          String
-  cpf           String
-  nis           String
-  rg            String
-  br_pdh        String
-  sex           String
-  dt_birth      DateTime
-  phone         String
-  phone_number  String
-  blood_type    String
-  email         String   @unique
-  password_hash String
+  name         String
+  cpf          String
+  nis          String
+  rg           String
+  br_pdh       String
+  sex          String
+  dt_birth     DateTime
+  phone        String
+  phone_number String
+  blood_type   String
 
   @@map("empregados")
 }
