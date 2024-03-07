@@ -11,5 +11,5 @@ export async function appRoutes(app: FastifyInstance) {
     app.post('/employees', createEmployee)
 
     app.post('/admin_login', authenticateAdmin)
-    app.post('/company_login', authenticateCompany)    
+    app.post('/company_login', authenticateCompany)
 }
