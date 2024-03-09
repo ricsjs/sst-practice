@@ -93,11 +93,11 @@ model Profissional {
   cbo       String
   formation String
   organ     String
-  sigla     String
+  acronym   String
   ccr       String
   uf        String
-  titulo    String
-  funcao    String
+  title     String
+  function  String
 
   @@map("profissionais")
 }
