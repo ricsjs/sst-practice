@@ -27,7 +27,8 @@ export async function createCompany(request: FastifyRequest, reply: FastifyReply
         await createCompanyService.execute({
             email,
             password,
-            cnpj, corporate_reason, 
+            cnpj,
+            corporate_reason, 
             fantasy_name,
             identification,
             cep,
