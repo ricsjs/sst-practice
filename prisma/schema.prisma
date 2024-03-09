@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  id            String      @id @default(uuid())
-  email         String      @unique
+  id            String         @id @default(uuid())
+  email         String         @unique
   password_hash String
   type          String
-  created_at    DateTime    @default(now())
+  created_at    DateTime       @default(now())
   Admin         Admin[]
   Empresa       Empresa[]
   Empregado     Empregado[]
+  Profissional  Profissional[]
 
   @@map("usuarios")
 }
@@ -77,4 +78,26 @@ model Empregado {
   blood_type   String
 
   @@map("empregados")
+}
+
+model Profissional {
+  id String @id @default(uuid())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  name      String
+  cpf       String
+  nis       String
+  rg        String
+  cbo       String
+  formation String
+  organ     String
+  sigla     String
+  ccr       String
+  uf        String
+  titulo    String
+  funcao    String
+
+  @@map("profissionais")
 }
