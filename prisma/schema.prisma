@@ -53,8 +53,35 @@ model Empresa {
   phone            String
   dt_start_esocial DateTime
   employee         Empregado[]
+  Unidade          Unidade[]
 
   @@map("empresas")
+}
+
+model Unidade {
+  id        String  @id @default(uuid())
+  company   Empresa @relation(fields: [companyId], references: [id])
+  companyId String
+
+  identification           String
+  cnpj                     String
+  cnea                     String
+  activity                 String
+  degree_of_risk           String
+  aso                      String
+  cep                      String
+  address                  String
+  neighborhood             String
+  city                     String
+  state                    String
+  email                    String
+  phone                    String
+  legal_representative     String
+  cpf_legal_representative String
+  cipa_type                String
+  num_employees_cipa       Int
+
+  @@map("unidades")
 }
 
 model Empregado {
