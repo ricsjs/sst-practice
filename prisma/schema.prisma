@@ -54,6 +54,7 @@ model Empresa {
   dt_start_esocial DateTime
   employee         Empregado[]
   Unidade          Unidade[]
+  Aso              Aso[]
 
   @@map("empresas")
 }
@@ -103,6 +104,7 @@ model Empregado {
   phone        String
   phone_number String
   blood_type   String
+  Aso          Aso[]
 
   @@map("empregados")
 }
@@ -127,4 +129,59 @@ model Profissional {
   function  String
 
   @@map("profissionais")
+}
+
+model Aso {
+  id String @id @default(uuid())
+
+  company   Empresa @relation(fields: [empresaId], references: [id])
+  empresaId String
+
+  employee    Empregado @relation(fields: [empregadoId], references: [id])
+  empregadoId String
+
+  // occupational risks
+  physical_occupational_risk     String?
+  chemical_occupational_risk     String?
+  biological_occupational_risk   String?
+  occupational_risk_of_accidents String?
+  ergonomic_occupational_risk    String?
+
+  // critical activities
+  work_at_height                        String
+  selfpropelled_machines                String
+  working_with_firearms                 String
+  confined_space                        String
+  food_handling                         String
+  electrical_installations_and_services String
+  observation                           String?
+  conclusion                            String?
+
+  doctor_responsible String
+  local              String
+  date               DateTime
+
+  // examining doctor
+  examining_doctor_fullname String
+  examining_doctor_function String
+  examining_doctor_crm      String
+
+  // technical manager
+  technical_manager_fullname String
+  technical_manager_function String
+  technical_manager_crm      String
+  Exam                       Exam[]
+
+  @@map("asos")
+}
+
+model Exam {
+  id   String   @id @default(uuid())
+  name String
+  date DateTime
+
+  aso   Aso    @relation(fields: [asoId], references: [id])
+  asoId String
+
+  @@map("exams")
 }
