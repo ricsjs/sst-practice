@@ -5,6 +5,7 @@ import { createCompany } from "./controllers/company-controllers.ts/create-compa
 import { createEmployee } from "./controllers/employee-controllers/create-employee";
 import { createProfessional } from "./controllers/professional-controllers.ts/create-professional";
 import { createUnit } from "./controllers/unit-controllers.ts/create-unit";
+import { createExam } from "./controllers/exam-controllers.ts/create-exam";
 
 export async function appRoutes(app: FastifyInstance) {
     app.post('/admins', createAdmin)
@@ -12,6 +13,7 @@ export async function appRoutes(app: FastifyInstance) {
     app.post('/employees', createEmployee)
     app.post('/professionals', createProfessional)
     app.post('/units', createUnit)
+    app.post('/exams', createExam)
 
     app.post('/login', authenticateUser)
 }

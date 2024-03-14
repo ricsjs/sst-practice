@@ -1,12 +1,10 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { UserAlreadyExistsError } from "../../../services/errors/user-already-exists-error"
 import { makeCreateEmployeeService } from "../../../services/factories/employee-factories/make-create-employee-service"
+import { UnableToRegisterError } from "../../../services/errors/unable-to-register-error"
 
 export async function createEmployee(request: FastifyRequest, reply: FastifyReply) {
     const createEmployeeSchema = z.object({
-        email: z.string().email(),
-        password: z.string().min(6),
         companyId: z.string(),
         name: z.string(),
         cpf: z.string(),
@@ -20,15 +18,13 @@ export async function createEmployee(request: FastifyRequest, reply: FastifyRepl
         blood_type: z.string()
     })
 
-    const { email, password, companyId, name, cpf, nis, rg, br_pdh, sex, dt_birth, phone, phone_number, blood_type } = createEmployeeSchema.parse(request.body)
+    const { companyId, name, cpf, nis, rg, br_pdh, sex, dt_birth, phone, phone_number, blood_type } = createEmployeeSchema.parse(request.body)
 
     try {
 
         const createEmployeeService = makeCreateEmployeeService()
 
         await createEmployeeService.execute({
-            email,
-            password,
             companyId,
             name,
             cpf,
@@ -42,7 +38,7 @@ export async function createEmployee(request: FastifyRequest, reply: FastifyRepl
             blood_type
         })
     } catch (error) {
-        if (error instanceof UserAlreadyExistsError) {
+        if (error instanceof UnableToRegisterError) {
             return reply.status(409).send({ message: error.message })
         }
 
