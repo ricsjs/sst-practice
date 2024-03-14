@@ -16,19 +16,21 @@ export async function authenticateUser(request: FastifyRequest, reply: FastifyRe
         
         const authenticateUserService = makeUserAuthenticateService()
 
-        const { userType } = await authenticateUserService.execute({
+        const { user } = await authenticateUserService.execute({
             email,
             password
         })
 
-        if (userType === "admin") {
-            return reply.redirect(200, '') // fix me
-        } else if (userType === "company") {
-            return reply.redirect(200, '').send({ userType }) // fix me
-        } else if (userType === "employee") {
-            return reply.redirect(200, '').send({ userType }) // fix me
+        const token = await reply.jwtSign({}, {
+            sign: {
+                sub: user.id
+            }
+        })
+
+        if (user.type === "admin" || user.type === "company" || user.type === "professional") {
+            return reply.send({ token });
         } else {
-            throw new InvalidUserError()
+            throw new InvalidUserError();
         }
         
     } catch (error) {
