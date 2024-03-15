@@ -28,7 +28,7 @@ export async function authenticateUser(request: FastifyRequest, reply: FastifyRe
         })
 
         if (user.type === "admin" || user.type === "company" || user.type === "professional") {
-            return reply.send({ token });
+            return reply.send({ token, type: user.type }); // fix me: redirect user in front-end
         } else {
             throw new InvalidUserError();
         }

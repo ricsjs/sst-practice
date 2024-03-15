@@ -1,6 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { UserAlreadyExistsError } from "../../../services/errors/user-already-exists-error"
 import { makeCreateExamService } from "../../../services/factories/exam-factories/make-create-exam-service"
 import { UnableToRegisterError } from "../../../services/errors/unable-to-register-error"
 
