@@ -16,6 +16,7 @@ interface CreateCompanyServiceRequest {
     neighborhood: string
     phone: string
     dt_start_esocial: Date
+    active: boolean
 }
 
 interface CreateCompanyServiceResponse {
@@ -29,7 +30,7 @@ export class CreateCompanyService {
     ) { }
 
     async execute({
-        email, password, cnpj, corporate_reason, fantasy_name, identification, cep, address, neighborhood, phone, dt_start_esocial
+        email, password, cnpj, corporate_reason, fantasy_name, identification, cep, address, neighborhood, phone, dt_start_esocial, active
     }: CreateCompanyServiceRequest): Promise<CreateCompanyServiceResponse> {
         const password_hash = await hash(password, 6)
 
@@ -57,6 +58,7 @@ export class CreateCompanyService {
             neighborhood,
             phone,
             dt_start_esocial,
+            active,
             user: { connect: { id: user.id } }
         })
 

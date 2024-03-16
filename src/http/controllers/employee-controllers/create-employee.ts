@@ -35,7 +35,8 @@ export async function createEmployee(request: FastifyRequest, reply: FastifyRepl
             dt_birth, 
             phone,
             phone_number,
-            blood_type
+            blood_type,
+            active: true
         })
     } catch (error) {
         if (error instanceof UnableToRegisterError) {

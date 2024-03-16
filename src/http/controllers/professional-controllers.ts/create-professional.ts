@@ -41,7 +41,8 @@ export async function createProfessional(request: FastifyRequest, reply: Fastify
             ccr,
             uf,
             title,
-            jobFunction
+            jobFunction,
+            active: true
         })
     } catch (error) {
         if (error instanceof UserAlreadyExistsError) {

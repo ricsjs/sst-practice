@@ -19,6 +19,7 @@ interface CreateProfessionalServiceRequest {
     uf: string
     title: string
     jobFunction: string
+    active: boolean
 }
 
 interface CreateProfessionalServiceResponse {
@@ -32,7 +33,7 @@ export class CreateProfessionalService {
     ) { }
 
     async execute({
-        email, password, name, cpf, nis, rg, cbo, formation, organ, acronym, ccr, uf, title, jobFunction
+        email, password, name, cpf, nis, rg, cbo, formation, organ, acronym, ccr, uf, title, jobFunction, active
     }: CreateProfessionalServiceRequest): Promise<CreateProfessionalServiceResponse> {
         const password_hash = await hash(password, 6)
 
@@ -63,6 +64,7 @@ export class CreateProfessionalService {
             uf,
             title,
             function: jobFunction,
+            active,
             user: { connect: { id: user.id } }
         })
 
