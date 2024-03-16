@@ -51,6 +51,7 @@ model Empresa {
   neighborhood     String
   phone            String
   dt_start_esocial DateTime
+  active           Boolean
   employee         Empregado[]
   Unidade          Unidade[]
   Aso              Aso[]
@@ -80,6 +81,7 @@ model Unidade {
   cpf_legal_representative String
   cipa_type                String
   num_employees_cipa       Int
+  active                   Boolean
 
   @@map("unidades")
 }
@@ -100,6 +102,7 @@ model Empregado {
   phone        String
   phone_number String
   blood_type   String
+  active       Boolean
   Aso          Aso[]
 
   @@map("empregados")
@@ -123,6 +126,7 @@ model Profissional {
   uf        String
   title     String
   function  String
+  active    Boolean
 
   @@map("profissionais")
 }
