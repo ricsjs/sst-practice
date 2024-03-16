@@ -9,15 +9,18 @@ SST Practice
 - [ ] Deve ser possível um administrador fazer um crud de clientes (empresas);
 - [ ] Deve ser possível um administrador fazer um crud de cards;
 - [ ] Deve ser possível um administrador fazer um crud de profissionais de saúde;
-- [ ] Deve ser possível um profissional de saúde fazer um crud de prontuário;
+- [ ] Deve ser possível um profissional de saúde fazer cruds de documentações (ASO e prontuários);
+- [ ] Deve ser possível filtrar empregados a partir de uma empresa no momento da criação da documentação;
+- [ ] Deve ser criado um card de notificação após o profissional de saúde cadastrar um documento referente a um empregado;
 - [ ] Deve ser possível um administrador visualizar todos os clientes;
 - [ ] Deve ser possível um cliente (empresa) acessar seus cards;
 - [ ] Deve ser possível um cliente (empresa) visualizar a documentação dos seus empregados;
-- [ ] Deve ser possível um cliente (empresa) checar andamento da documentação.
+- [ ] Deve ser possível um cliente (empresa) visualizar todos os registros e filtrar tudo referente aos empregados;
+- [ ] Deve ser possível um usuário resgatar e atualizar informações de perfil;
 
 ## RN
 
-- [ ] O sistema deve notificar updates de cards no e-mail do cliente;
+- [ ] O sistema deve notificar criação de cards de notificação no e-mail do cliente;
 - [x] Não deve haver e-mails duplicados no sistema;
 - [ ] Clientes (empresas), outros administradores e profissionais de saúde só poderão ser cadastrados por administradores.
 - [ ] A empresa só terá acesso a documentação dos seus empregados;
