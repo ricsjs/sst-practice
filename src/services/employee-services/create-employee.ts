@@ -13,6 +13,7 @@ interface CreateEmployeeServiceRequest {
     phone_number: string
     blood_type: string
     companyId: string
+    active: boolean
 }
 
 interface CreateEmployeeServiceResponse {
@@ -25,7 +26,7 @@ export class CreateEmployeeService {
     ) { }
 
     async execute({
-        name, cpf, nis, rg, br_pdh, sex, dt_birth, phone, phone_number, blood_type, companyId
+        name, cpf, nis, rg, br_pdh, sex, dt_birth, phone, phone_number, blood_type, active, companyId
     }: CreateEmployeeServiceRequest): Promise<CreateEmployeeServiceResponse> {
 
         const employee = await this.employeesRepository.create({
@@ -39,6 +40,7 @@ export class CreateEmployeeService {
             phone,
             phone_number,
             blood_type,
+            active,
             company: { connect: { id: companyId } }
         })
 

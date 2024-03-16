@@ -49,7 +49,8 @@ export async function createUnit(request: FastifyRequest, reply: FastifyReply) {
             legal_representative,
             cpf_legal_representative,
             cipa_type,
-            num_employees_cipa
+            num_employees_cipa,
+            active: true
         })
     } catch (error) {
         if (error instanceof UnableToRegisterError) {

@@ -35,7 +35,8 @@ export async function createCompany(request: FastifyRequest, reply: FastifyReply
             address,
             neighborhood,
             phone,
-            dt_start_esocial
+            dt_start_esocial,
+            active: true
         })
     } catch (error) {
         if (error instanceof UserAlreadyExistsError) {

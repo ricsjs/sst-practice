@@ -20,6 +20,7 @@ interface CreateUnitServiceRequest {
     cipa_type: string
     num_employees_cipa: number
     companyId: string
+    active: boolean
 }
 
 interface CreateUnitServiceResponse {
@@ -32,7 +33,7 @@ export class CreateUnitService {
     ) { }
 
     async execute({
-        identification, cnpj, cnea, activity, degree_of_risk, aso, cep, address, neighborhood, city, state, email, phone, legal_representative, cpf_legal_representative, cipa_type, num_employees_cipa, companyId
+        identification, cnpj, cnea, activity, degree_of_risk, aso, cep, address, neighborhood, city, state, email, phone, legal_representative, cpf_legal_representative, cipa_type, num_employees_cipa, companyId, active
     }: CreateUnitServiceRequest): Promise<CreateUnitServiceResponse> {
 
         const unit = await this.unitsRepository.create({
@@ -53,6 +54,7 @@ export class CreateUnitService {
             cpf_legal_representative,
             cipa_type,
             num_employees_cipa,
+            active,
             company: { connect: { id: companyId } },
         })
 
