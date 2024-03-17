@@ -4,6 +4,27 @@ import { EmployeesRepository } from "../employees-repository"
 
 export class PrismaEmployeesRepository implements EmployeesRepository {
 
+    async findById(id: string) {
+        const employee = await prisma.empregado.findUnique({
+            where: {
+                id
+            }
+        })
+
+        return employee
+    }
+
+    async update(data: Empregado) {
+        const employee = await prisma.empregado.update({
+            where: {
+                id: data.id
+            },
+            data
+        })
+
+        return employee
+    }
+
     async delete(id: string): Promise<void> {
         await prisma.empregado.update({
             where: { id },
