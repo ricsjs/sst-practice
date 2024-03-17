@@ -30,5 +30,5 @@ SST Practice
 - [x] A senha de todos os usuários do sistema precisa estar criptografada;
 - [x] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
 - [x] O usuário deve ser identificado por um JWT;
-- [ ] Adicionar uma coluna para verificar se o usuário está ativo ou inativo;
+- [x] Adicionar uma coluna para verificar se o usuário está ativo ou inativo;
 - [ ] O administrador poderá assinar um documento digitalmente por meio da API de assinatura digital do Gov.
