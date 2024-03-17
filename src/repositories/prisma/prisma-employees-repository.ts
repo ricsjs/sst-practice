@@ -4,6 +4,15 @@ import { EmployeesRepository } from "../employees-repository"
 
 export class PrismaEmployeesRepository implements EmployeesRepository {
 
+    async delete(id: string): Promise<void> {
+        await prisma.empregado.update({
+            where: { id },
+            data: {
+                active: false
+            }
+        })
+    }
+
     async findMany(companyId: string): Promise<Empregado[]> {
         const employees = await prisma.empregado.findMany({
             where: {
