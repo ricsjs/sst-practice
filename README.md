@@ -5,7 +5,7 @@ SST Practice
 ## RF
 
 - [x] Deve ser possível os usuários acessarem o sistema;
-- [ ] Deve ser possível um cliente (empresa) cadastrar seus empregados;
+- [ ] Deve ser possível um cliente (empresa) fazer um crud de seus empregados;
 - [ ] Deve ser possível um administrador fazer um crud de clientes (empresas);
 - [ ] Deve ser possível um administrador fazer um crud de cards;
 - [ ] Deve ser possível um administrador fazer um crud de profissionais de saúde;
