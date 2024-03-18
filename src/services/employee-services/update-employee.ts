@@ -1,9 +1,8 @@
 import { Empregado } from "@prisma/client"
 import { EmployeesRepository } from "../../repositories/employees-repository"
-import { ResourceNotFoundError } from "../errors/resource-not-found-error"
 
 interface UpdateEmployeeServiceRequest {
-    employeeId: string
+    id: string
     name: string
     cpf: string
     nis: string
@@ -28,17 +27,12 @@ export class UpdateEmployeesService {
     ) { }
 
     async execute({
-        employeeId, name, cpf, nis, rg, br_pdh, sex, dt_birth, phone, phone_number, blood_type, companyId, active
+        id, name, cpf, nis, rg, br_pdh, sex, dt_birth, phone, phone_number, blood_type, companyId, active
     }: UpdateEmployeeServiceRequest): Promise<UpdateEmployeeServiceResponse> {
         try {
-            const employee = await this.employeesRepository.findById(employeeId)
-
-            if (!employee) {
-                throw new ResourceNotFoundError()
-            }
 
             const updatedEmployee = await this.employeesRepository.update({
-                id: employeeId,
+                id,
                 name,
                 cpf,
                 nis,

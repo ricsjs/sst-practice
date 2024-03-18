@@ -40,7 +40,7 @@ export async function createEmployee(request: FastifyRequest, reply: FastifyRepl
         })
     } catch (error) {
         if (error instanceof UnableToRegisterError) {
-            return reply.status(409).send({ message: error.message })
+            return reply.status(500).send({ message: error.message })
         }
 
         throw error

@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { makeListEmployeesService } from "../../../services/factories/employee-factories/make-list-employee-service"
+import { makeListEmployeesService } from "../../../services/factories/employee-factories/make-fetch-all-employees-service"
 import { NoRecordsFoundError } from "../../../services/errors/no-records-found-error"
 
 export async function listEmployees(request: FastifyRequest, reply: FastifyReply) {
@@ -19,7 +19,7 @@ export async function listEmployees(request: FastifyRequest, reply: FastifyReply
         return reply.status(200).send({ employees })
     } catch (error) {
         if (error instanceof NoRecordsFoundError) {
-            return reply.status(409).send({ message: error.message })
+            return reply.status(404).send({ message: error.message })
         }
 
         throw error

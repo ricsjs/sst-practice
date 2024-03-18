@@ -21,7 +21,7 @@ export async function deleteEmployees(request: FastifyRequest, reply: FastifyRep
 
     } catch (error) {
         if (error instanceof ResourceNotFoundError) {
-            return reply.status(409).send({ message: error.message })
+            return reply.status(404).send({ message: error.message })
         }
 
         console.error(error);

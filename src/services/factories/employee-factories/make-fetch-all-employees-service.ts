@@ -1,9 +1,9 @@
 import { PrismaEmployeesRepository } from "../../../repositories/prisma/prisma-employees-repository";
-import { ListEmployeesService } from "../../employee-services/list-employees";
+import { FetchAllEmployeesService } from "../../employee-services/fetch-all-employees";
 
 export function makeListEmployeesService() {
     const prismaEmployeesRepository = new PrismaEmployeesRepository();
-    const listEmployeesService = new ListEmployeesService(prismaEmployeesRepository);
+    const listEmployeesService = new FetchAllEmployeesService(prismaEmployeesRepository);
 
     return listEmployeesService;
 }

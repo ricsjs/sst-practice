@@ -9,7 +9,7 @@ interface CreateEmployeeServiceResponse {
     employees: Empregado[]
 }
 
-export class ListEmployeesService {
+export class FetchAllEmployeesService {
     constructor(
         private employeesRepository: EmployeesRepository,
     ) { }

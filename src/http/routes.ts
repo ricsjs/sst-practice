@@ -9,12 +9,14 @@ import { createExam } from "./controllers/exam-controllers.ts/create-exam";
 import { createAso } from "./controllers/aso-controllers/create-aso";
 import { listEmployees } from "./controllers/employee-controllers/list-employees";
 import { deleteEmployees } from "./controllers/employee-controllers/delete-employee";
+import { updateEmployees } from "./controllers/employee-controllers/update-employee";
 
 export async function appRoutes(app: FastifyInstance) {
     // employees requests
     app.post('/employees', createEmployee)
     app.get('/employees:companyId', listEmployees)
     app.put('/employees/:id', deleteEmployees)
+    app.put('/employees/update/:id', updateEmployees)
 
     // companies requests
     app.post('/companies', createCompany)
