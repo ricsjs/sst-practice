@@ -7,15 +7,35 @@ import { createProfessional } from "./controllers/professional-controllers.ts/cr
 import { createUnit } from "./controllers/unit-controllers.ts/create-unit";
 import { createExam } from "./controllers/exam-controllers.ts/create-exam";
 import { createAso } from "./controllers/aso-controllers/create-aso";
+import { listEmployees } from "./controllers/employee-controllers/list-employees";
+import { deleteEmployees } from "./controllers/employee-controllers/delete-employee";
+import { updateEmployees } from "./controllers/employee-controllers/update-employee";
 
 export async function appRoutes(app: FastifyInstance) {
-    app.post('/admins', createAdmin)
-    app.post('/companies', createCompany)
+    // employees requests
     app.post('/employees', createEmployee)
-    app.post('/professionals', createProfessional)
+    app.get('/employees:companyId', listEmployees)
+    app.put('/employees/:id', deleteEmployees)
+    app.put('/employees/update/:id', updateEmployees)
+
+    // companies requests
+    app.post('/companies', createCompany)
+
+    // units requests
     app.post('/units', createUnit)
-    app.post('/exams', createExam)
+
+    // professionals requests
+    app.post('/professionals', createProfessional)
+
+    // asos requests
     app.post('/asos', createAso)
 
+    // exams requests
+    app.post('/exams', createExam)
+
+    // admin requests
+    app.post('/admins', createAdmin)
+    
+    // auth
     app.post('/login', authenticateUser)
 }
