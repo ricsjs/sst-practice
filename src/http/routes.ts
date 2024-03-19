@@ -7,9 +7,13 @@ import { createProfessional } from "./controllers/professional-controllers.ts/cr
 import { createUnit } from "./controllers/unit-controllers.ts/create-unit";
 import { createExam } from "./controllers/exam-controllers.ts/create-exam";
 import { createAso } from "./controllers/aso-controllers/create-aso";
-import { listEmployees } from "./controllers/employee-controllers/list-employees";
+import { fetchAllEmployees } from "./controllers/employee-controllers/fetch-all-employees";
 import { deleteEmployees } from "./controllers/employee-controllers/delete-employee";
 import { updateEmployees } from "./controllers/employee-controllers/update-employee";
+import { fetchAllUnits } from "./controllers/unit-controllers.ts/fetch-all-units";
+import { fetchUnitById } from "./controllers/unit-controllers.ts/fetch-unit-by-id";
+import { updateUnit } from "./controllers/unit-controllers.ts/update-unit";
+import { deleteUnit } from "./controllers/unit-controllers.ts/delete-unit";
 import { listCompanies } from "./controllers/company-controllers.ts/list-companies";
 import { deleteCompany } from "./controllers/company-controllers.ts/delete-company";
 import { updateCompany } from "./controllers/company-controllers.ts/update-company";
@@ -17,7 +21,7 @@ import { updateCompany } from "./controllers/company-controllers.ts/update-compa
 export async function appRoutes(app: FastifyInstance) {
   // employees requests
   app.post("/employees", createEmployee);
-  app.get("/employees:companyId", listEmployees);
+  app.get("/employees:companyId", fetchAllEmployees);
   app.put("/employees/:id", deleteEmployees);
   app.put("/employees/update/:id", updateEmployees);
 
@@ -29,6 +33,10 @@ export async function appRoutes(app: FastifyInstance) {
 
   // units requests
   app.post("/units", createUnit);
+  app.get("/units", fetchAllUnits);
+  app.get("/unit/:id", fetchUnitById);
+  app.put("/unit/update/:id", updateUnit);
+  app.put("/unit/:id", deleteUnit);
 
   // professionals requests
   app.post("/professionals", createProfessional);
