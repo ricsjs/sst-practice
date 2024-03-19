@@ -12,6 +12,8 @@ import { deleteEmployees } from "./controllers/employee-controllers/delete-emplo
 import { updateEmployees } from "./controllers/employee-controllers/update-employee";
 import { fetchAllUnits } from "./controllers/unit-controllers.ts/fetch-all-units";
 import { fetchUnitById } from "./controllers/unit-controllers.ts/fetch-unit-by-id";
+import { updateUnit } from "./controllers/unit-controllers.ts/update-unit";
+import { deleteUnit } from "./controllers/unit-controllers.ts/delete-unit";
 
 export async function appRoutes(app: FastifyInstance) {
     // employees requests
@@ -27,6 +29,8 @@ export async function appRoutes(app: FastifyInstance) {
     app.post('/units', createUnit)
     app.get('/units', fetchAllUnits)
     app.get('/unit/:id', fetchUnitById)
+    app.put('/unit/update/:id', updateUnit)
+    app.put('/unit/:id', deleteUnit)
 
     // professionals requests
     app.post('/professionals', createProfessional)

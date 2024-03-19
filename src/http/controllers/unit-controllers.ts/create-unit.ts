@@ -25,7 +25,7 @@ export async function createUnit(request: FastifyRequest, reply: FastifyReply) {
         num_employees_cipa: z.number()
     })
 
-    const { companyId, identification, cnpj, cnea, activity, degree_of_risk, aso, cep, address, neighborhood, city, state, email, phone, legal_representative, cpf_legal_representative, cipa_type, num_employees_cipa, } = createUnitSchema.parse(request.body)
+    const { companyId, identification, cnpj, cnea, activity, degree_of_risk, aso, cep, address, neighborhood, city, state, email, phone, legal_representative, cpf_legal_representative, cipa_type, num_employees_cipa } = createUnitSchema.parse(request.body)
 
     try {
 
