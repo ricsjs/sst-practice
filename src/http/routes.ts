@@ -10,32 +10,38 @@ import { createAso } from "./controllers/aso-controllers/create-aso";
 import { listEmployees } from "./controllers/employee-controllers/list-employees";
 import { deleteEmployees } from "./controllers/employee-controllers/delete-employee";
 import { updateEmployees } from "./controllers/employee-controllers/update-employee";
+import { listCompanies } from "./controllers/company-controllers.ts/list-companies";
+import { deleteCompany } from "./controllers/company-controllers.ts/delete-company";
+import { updateCompany } from "./controllers/company-controllers.ts/update-company";
 
 export async function appRoutes(app: FastifyInstance) {
-    // employees requests
-    app.post('/employees', createEmployee)
-    app.get('/employees:companyId', listEmployees)
-    app.put('/employees/:id', deleteEmployees)
-    app.put('/employees/update/:id', updateEmployees)
+  // employees requests
+  app.post("/employees", createEmployee);
+  app.get("/employees:companyId", listEmployees);
+  app.put("/employees/:id", deleteEmployees);
+  app.put("/employees/update/:id", updateEmployees);
 
-    // companies requests
-    app.post('/companies', createCompany)
+  // companies requests
+  app.post("/companies", createCompany);
+  app.get("/companies:companyId", listCompanies);
+  app.put("/companies/:id", deleteCompany);
+  app.put("/companies/update/:id", updateCompany);
 
-    // units requests
-    app.post('/units', createUnit)
+  // units requests
+  app.post("/units", createUnit);
 
-    // professionals requests
-    app.post('/professionals', createProfessional)
+  // professionals requests
+  app.post("/professionals", createProfessional);
 
-    // asos requests
-    app.post('/asos', createAso)
+  // asos requests
+  app.post("/asos", createAso);
 
-    // exams requests
-    app.post('/exams', createExam)
+  // exams requests
+  app.post("/exams", createExam);
 
-    // admin requests
-    app.post('/admins', createAdmin)
-    
-    // auth
-    app.post('/login', authenticateUser)
+  // admin requests
+  app.post("/admins", createAdmin);
+
+  // auth
+  app.post("/login", authenticateUser);
 }
