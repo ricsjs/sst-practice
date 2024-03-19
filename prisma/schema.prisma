@@ -127,6 +127,7 @@ model Profissional {
   title     String
   function  String
   active    Boolean
+  Aso          Aso[]
 
   @@map("profissionais")
 }
@@ -139,6 +140,9 @@ model Aso {
 
   employee    Empregado @relation(fields: [empregadoId], references: [id])
   empregadoId String
+
+  professional Profissional @relation(fields: [profissionalId], references: [id])
+  profissionalId String
 
   // occupational risks
   physical_occupational_risk     String?
