@@ -1,6 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { NoRecordsFoundError } from "../../../services/errors/no-records-found-error"
 import { makeDeleteEmployeesService } from "../../../services/factories/employee-factories/make-delete-employee-service"
 import { ResourceNotFoundError } from "../../../services/errors/resource-not-found-error"
 
