@@ -11,6 +11,7 @@ import { fetchAllEmployees } from "./controllers/employee-controllers/fetch-all-
 import { deleteEmployees } from "./controllers/employee-controllers/delete-employee";
 import { updateEmployees } from "./controllers/employee-controllers/update-employee";
 import { fetchAllUnits } from "./controllers/unit-controllers.ts/fetch-all-units";
+import { fetchUnitById } from "./controllers/unit-controllers.ts/fetch-unit-by-id";
 
 export async function appRoutes(app: FastifyInstance) {
     // employees requests
@@ -25,6 +26,7 @@ export async function appRoutes(app: FastifyInstance) {
     // units requests
     app.post('/units', createUnit)
     app.get('/units', fetchAllUnits)
+    app.get('/unit/:id', fetchUnitById)
 
     // professionals requests
     app.post('/professionals', createProfessional)
