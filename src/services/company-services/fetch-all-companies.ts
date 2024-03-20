@@ -1,10 +1,6 @@
 import { Empresa } from "@prisma/client";
 import { CompaniesRepository } from "../../repositories/companies-repository";
 
-interface FetchAllCompaniesServiceRequest {
-  companyId: string;
-}
-
 interface FetchAllCompaniesServiceResponse {
   companies: Empresa[];
 }
@@ -12,10 +8,8 @@ interface FetchAllCompaniesServiceResponse {
 export class FetchAllCompaniesService {
   constructor(private companiesRepository: CompaniesRepository) {}
 
-  async execute({
-    companyId,
-  }: FetchAllCompaniesServiceRequest): Promise<FetchAllCompaniesServiceResponse> {
-    const companies = await this.companiesRepository.findMany(companyId);
+  async execute(): Promise<FetchAllCompaniesServiceResponse> {
+    const companies = await this.companiesRepository.findMany();
 
     return {
       companies,

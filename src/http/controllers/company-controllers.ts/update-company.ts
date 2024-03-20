@@ -7,7 +7,7 @@ export async function updateCompany(
   reply: FastifyReply
 ) {
   const updateCompanyBodySchema = z.object({
-    userId: z.string().email(),
+    userId: z.string(),
     email: z.string().email(),
     password: z.string().min(6),
     cnpj: z.string(),

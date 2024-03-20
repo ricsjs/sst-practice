@@ -32,13 +32,8 @@ export class PrismaCompaniesRepository implements CompaniesRepository {
     return company;
   }
 
-  async findMany(companyId: string): Promise<Empresa[]> {
-    const companies = await prisma.empresa.findMany({
-      where: {
-        userId: companyId,
-        active: true,
-      },
-    });
+  async findMany(): Promise<Empresa[]> {
+    const companies = await prisma.empresa.findMany();
 
     return companies;
   }
