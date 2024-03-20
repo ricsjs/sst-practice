@@ -14,26 +14,26 @@ import { fetchAllUnits } from "./controllers/unit-controllers.ts/fetch-all-units
 import { fetchUnitById } from "./controllers/unit-controllers.ts/fetch-unit-by-id";
 import { updateUnit } from "./controllers/unit-controllers.ts/update-unit";
 import { deleteUnit } from "./controllers/unit-controllers.ts/delete-unit";
-import { listCompanies } from "./controllers/company-controllers.ts/list-companies";
+import { fetchAllCompanies } from "./controllers/company-controllers.ts/list-companies";
 import { deleteCompany } from "./controllers/company-controllers.ts/delete-company";
 import { updateCompany } from "./controllers/company-controllers.ts/update-company";
 
 export async function appRoutes(app: FastifyInstance) {
   // employees requests
   app.post("/employees", createEmployee);
-  app.get("/employees:companyId", fetchAllEmployees);
+  app.get("/employees/:companyId", fetchAllEmployees);
   app.put("/employees/:id", deleteEmployees);
   app.put("/employees/update/:id", updateEmployees);
 
   // companies requests
   app.post("/companies", createCompany);
-  app.get("/companies:companyId", listCompanies);
+  app.get("/companies", fetchAllCompanies);
   app.put("/companies/delete/:id", deleteCompany);
   app.put("/companies/update/:id", updateCompany);
 
   // units requests
   app.post("/units", createUnit);
-  app.get("/units", fetchAllUnits);
+  app.get("/units/:companyId", fetchAllUnits);
   app.get("/unit/:id", fetchUnitById);
   app.put("/unit/update/:id", updateUnit);
   app.put("/unit/:id", deleteUnit);

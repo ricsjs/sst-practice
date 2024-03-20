@@ -8,7 +8,7 @@ export async function fetchAllEmployees(request: FastifyRequest, reply: FastifyR
         companyId: z.string()
     })
 
-    const { companyId } = listEmployeesSchema.parse(request.query)
+    const { companyId } = listEmployeesSchema.parse(request.params)
 
     try {
 

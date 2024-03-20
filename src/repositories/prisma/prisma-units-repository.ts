@@ -33,9 +33,10 @@ export class PrismaUnitsRepository implements UnitsRepository {
         })
     }
 
-    async findMany(): Promise<Unidade[]> {
+    async findMany(companyId: string): Promise<Unidade[]> {
         const units = await prisma.unidade.findMany({
             where: {
+                companyId: companyId,
                 active: true
             }
         });
