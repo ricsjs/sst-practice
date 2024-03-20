@@ -1,11 +1,11 @@
 import { Empregado } from "@prisma/client"
 import { EmployeesRepository } from "../../repositories/employees-repository"
 
-interface CreateEmployeeServiceRequest {
+interface FetchAllEmployeesServiceRequest {
     companyId: string
 }
 
-interface CreateEmployeeServiceResponse {
+interface FetchAllEmployeesServiceResponse {
     employees: Empregado[]
 }
 
@@ -16,7 +16,7 @@ export class FetchAllEmployeesService {
 
     async execute({
         companyId
-    }: CreateEmployeeServiceRequest): Promise<CreateEmployeeServiceResponse> {
+    }: FetchAllEmployeesServiceRequest): Promise<FetchAllEmployeesServiceResponse> {
 
         const employees = await this.employeesRepository.findMany(companyId)
 

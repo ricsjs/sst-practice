@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { makeCreateUnitService } from "../../../services/factories/unit-factories/make-create-unit-service"
-import { UnableToRegisterError } from "../../../services/errors/unable-to-register-error"
+import { ResourceNotFoundError } from "../../../services/errors/resource-not-found-error"
+import { makeUpdateUnitService } from "../../../services/factories/unit-factories/make-update-unit-service"
 
-export async function createUnit(request: FastifyRequest, reply: FastifyReply) {
-    const createUnitSchema = z.object({
+export async function updateUnit(request: FastifyRequest, reply: FastifyReply) {
+    const updateUnitBodySchema = z.object({
         companyId: z.string(),
         identification: z.string(),
         cnpj: z.string(),
@@ -25,13 +25,20 @@ export async function createUnit(request: FastifyRequest, reply: FastifyReply) {
         num_employees_cipa: z.number()
     })
 
-    const { companyId, identification, cnpj, cnea, activity, degree_of_risk, aso, cep, address, neighborhood, city, state, email, phone, legal_representative, cpf_legal_representative, cipa_type, num_employees_cipa } = createUnitSchema.parse(request.body)
+    const updateUnitParamSchema = z.object({
+        id: z.string()
+    })
 
     try {
 
-        const createUnitService = makeCreateUnitService()
+        const { id } = updateUnitParamSchema.parse(request.params)
 
-        await createUnitService.execute({
+        const { companyId, identification, cnpj, cnea, activity, degree_of_risk, aso, cep, address, neighborhood, city, state, email, phone, legal_representative, cpf_legal_representative, cipa_type, num_employees_cipa } = updateUnitBodySchema.parse(request.body)
+
+        const updateUnitService = makeUpdateUnitService()
+
+        await updateUnitService.execute({
+            id,
             companyId,
             identification,
             cnpj,
@@ -52,13 +59,15 @@ export async function createUnit(request: FastifyRequest, reply: FastifyReply) {
             num_employees_cipa,
             active: true
         })
+
+        return reply.status(200).send({ message: "Unit successfully updated." });
+
     } catch (error) {
-        if (error instanceof UnableToRegisterError) {
-            return reply.status(409).send({ message: error.message })
+        if (error instanceof ResourceNotFoundError) {
+            return reply.status(404).send({ message: error.message })
         }
 
-        throw error
+        console.error(error);
+        return reply.status(500).send({ message: 'Internal Server Error' });
     }
-
-    return reply.status(201).send()
 }
