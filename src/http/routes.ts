@@ -14,7 +14,7 @@ import { fetchAllUnits } from "./controllers/unit-controllers.ts/fetch-all-units
 import { fetchUnitById } from "./controllers/unit-controllers.ts/fetch-unit-by-id";
 import { updateUnit } from "./controllers/unit-controllers.ts/update-unit";
 import { deleteUnit } from "./controllers/unit-controllers.ts/delete-unit";
-import { fetchAllCompanies } from "./controllers/company-controllers.ts/list-companies";
+import { fetchAllCompanies } from "./controllers/company-controllers.ts/fetch-all-companies";
 import { deleteCompany } from "./controllers/company-controllers.ts/delete-company";
 import { updateCompany } from "./controllers/company-controllers.ts/update-company";
 import { fetchEmployeeById } from "./controllers/employee-controllers/fetch-employee-by-id";
