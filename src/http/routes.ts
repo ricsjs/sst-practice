@@ -30,6 +30,7 @@ export async function appRoutes(app: FastifyInstance) {
   // companies requests
   app.post("/companies", createCompany);
   app.get("/companies", fetchAllCompanies);
+  app.get("/companies/:id", deleteCompany);
   app.put("/companies/delete/:id", deleteCompany);
   app.put("/companies/update/:id", updateCompany);
 
