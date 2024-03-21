@@ -18,12 +18,16 @@ import { fetchAllCompanies } from "./controllers/company-controllers.ts/fetch-al
 import { deleteCompany } from "./controllers/company-controllers.ts/delete-company";
 import { updateCompany } from "./controllers/company-controllers.ts/update-company";
 import { fetchEmployeeById } from "./controllers/employee-controllers/fetch-employee-by-id";
+import { fetchAllAsos } from "./controllers/aso-controllers/fetch-all-asos";
+import { fetchAsoById } from "./controllers/aso-controllers/fetch-aso-by-id";
+import { updateAso } from "./controllers/aso-controllers/update-aso";
+import { deleteAso } from "./controllers/aso-controllers/delete-aso";
 
 export async function appRoutes(app: FastifyInstance) {
   // employees requests
   app.post("/employees", createEmployee);
   app.get("/employees/:companyId", fetchAllEmployees);
-  app.get("/employees/:id", fetchEmployeeById);
+  app.get("/employee/:id", fetchEmployeeById);
   app.put("/employees/:id", deleteEmployees);
   app.put("/employees/update/:id", updateEmployees);
 
@@ -46,6 +50,10 @@ export async function appRoutes(app: FastifyInstance) {
 
   // asos requests
   app.post("/asos", createAso);
+  app.get("/asos", fetchAllAsos);
+  app.get("/aso/:id", fetchAsoById);
+  app.put("/aso/update/:id", updateAso);
+  app.put("/aso/:id", deleteAso);
 
   // exams requests
   app.post("/exams", createExam);
