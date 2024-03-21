@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { makeUpdateCompanyService } from "../../../services/factories/company-services/make-update-company";
+import { makeUpdateCompanyService } from "../../../services/factories/company-factories/make-update-company";
 
 export async function updateCompany(
   request: FastifyRequest,
