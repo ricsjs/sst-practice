@@ -3,8 +3,8 @@ import { AsosRepository } from "../../repositories/asos-repository";
 
 interface UpdateAsoServiceRequest {
     id: string
-    empresaId: string
-    empregadoId: string
+    companyId: string
+    employeeId: string
     profissionalId: string
 
     // occupational risks
@@ -48,13 +48,13 @@ export class UpdateAsoService {
     constructor(private asosRepository: AsosRepository) { }
 
     async execute({
-        id, empresaId, empregadoId, profissionalId, physical_occupational_risk, chemical_occupational_risk, biological_occupational_risk, occupational_risk_of_accidents, ergonomic_occupational_risk, work_at_height, selfpropelled_machines,
+        id, companyId, employeeId, profissionalId, physical_occupational_risk, chemical_occupational_risk, biological_occupational_risk, occupational_risk_of_accidents, ergonomic_occupational_risk, work_at_height, selfpropelled_machines,
         working_with_firearms, confined_space, food_handling, electrical_installations_and_services, observation, conclusion, doctor_responsible, local, date, examining_doctor_fullname, examining_doctor_function, examining_doctor_crm,
         technical_manager_fullname, technical_manager_function, technical_manager_crm, active
     }: UpdateAsoServiceRequest): Promise<UpdateAsoServiceResponse> {
         try {
             const updatedAso = await this.asosRepository.update({
-                id, empresaId, empregadoId, profissionalId, physical_occupational_risk, chemical_occupational_risk, biological_occupational_risk, occupational_risk_of_accidents, ergonomic_occupational_risk, work_at_height, selfpropelled_machines,
+                id, empresaId: companyId, empregadoId: employeeId, profissionalId, physical_occupational_risk, chemical_occupational_risk, biological_occupational_risk, occupational_risk_of_accidents, ergonomic_occupational_risk, work_at_height, selfpropelled_machines,
                 working_with_firearms, confined_space, food_handling, electrical_installations_and_services, observation, conclusion, doctor_responsible, local, date, examining_doctor_fullname, examining_doctor_function, examining_doctor_crm,
                 technical_manager_fullname, technical_manager_function, technical_manager_crm, active
             });

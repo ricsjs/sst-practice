@@ -65,7 +65,8 @@ export async function createAso(request: FastifyRequest, reply: FastifyReply) {
             examining_doctor_crm,
             technical_manager_fullname,
             technical_manager_function,
-            technical_manager_crm
+            technical_manager_crm,
+            active: true
         })
     } catch (error) {
         if (error instanceof UnableToRegisterError) {

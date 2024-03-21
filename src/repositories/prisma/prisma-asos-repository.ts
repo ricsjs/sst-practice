@@ -4,7 +4,11 @@ import { AsosRepository } from "../asos-repository"
 
 export class PrismaAsosRepository implements AsosRepository {
     async findMany(): Promise<Aso[]> {
-        const asos = await prisma.aso.findMany();
+        const asos = await prisma.aso.findMany({
+            where: {
+                active: true,
+            }
+        });
 
         return asos;
     }
