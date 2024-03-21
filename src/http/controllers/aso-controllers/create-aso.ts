@@ -7,6 +7,7 @@ export async function createAso(request: FastifyRequest, reply: FastifyReply) {
     const createAsoSchema = z.object({
         companyId: z.string(),
         employeeId: z.string(),
+        profissionalId: z.string(),
         physical_occupational_risk: z.string(),
         chemical_occupational_risk: z.string(),
         biological_occupational_risk: z.string(),
@@ -31,7 +32,7 @@ export async function createAso(request: FastifyRequest, reply: FastifyReply) {
         technical_manager_crm: z.string()
     })
 
-    const { companyId, employeeId, physical_occupational_risk, chemical_occupational_risk, biological_occupational_risk, occupational_risk_of_accidents, ergonomic_occupational_risk, work_at_height, selfpropelled_machines,
+    const { companyId, employeeId, profissionalId, physical_occupational_risk, chemical_occupational_risk, biological_occupational_risk, occupational_risk_of_accidents, ergonomic_occupational_risk, work_at_height, selfpropelled_machines,
         working_with_firearms, confined_space, food_handling, electrical_installations_and_services, observation, conclusion, doctor_responsible, local, date, examining_doctor_fullname, examining_doctor_function, examining_doctor_crm,
         technical_manager_fullname, technical_manager_function, technical_manager_crm } = createAsoSchema.parse(request.body)
 
@@ -42,6 +43,7 @@ export async function createAso(request: FastifyRequest, reply: FastifyReply) {
         await createAsoService.execute({
             companyId,
             employeeId,
+            profissionalId,
             physical_occupational_risk,
             chemical_occupational_risk,
             biological_occupational_risk,

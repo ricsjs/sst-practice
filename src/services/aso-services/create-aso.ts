@@ -4,6 +4,7 @@ import { AsosRepository } from "../../repositories/asos-repository"
 interface CreateAsoServiceRequest {
     companyId: string
     employeeId: string
+    profissionalId: string
 
     // occupational risks
     physical_occupational_risk: string
@@ -48,13 +49,14 @@ export class CreateAsoService {
     ) { }
 
     async execute({
-        companyId, employeeId, physical_occupational_risk, chemical_occupational_risk, biological_occupational_risk, occupational_risk_of_accidents, ergonomic_occupational_risk, work_at_height, selfpropelled_machines,
+        companyId, employeeId, profissionalId, physical_occupational_risk, chemical_occupational_risk, biological_occupational_risk, occupational_risk_of_accidents, ergonomic_occupational_risk, work_at_height, selfpropelled_machines,
         working_with_firearms, confined_space, food_handling, electrical_installations_and_services, observation, conclusion, doctor_responsible, local, date, examining_doctor_fullname, examining_doctor_function, examining_doctor_crm,
         technical_manager_fullname, technical_manager_function, technical_manager_crm
     }: CreateAsoServiceRequest): Promise<CreateAsoServiceResponse> {
         const aso = await this.asosRepository.create({
             company: { connect: { id: companyId } },
             employee: { connect: { id: employeeId } },
+            professional: { connect: { id: profissionalId } },
             physical_occupational_risk,
             chemical_occupational_risk,
             biological_occupational_risk,
