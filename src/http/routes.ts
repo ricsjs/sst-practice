@@ -22,6 +22,9 @@ import { fetchAllAsos } from "./controllers/aso-controllers/fetch-all-asos";
 import { fetchAsoById } from "./controllers/aso-controllers/fetch-aso-by-id";
 import { updateAso } from "./controllers/aso-controllers/update-aso";
 import { deleteAso } from "./controllers/aso-controllers/delete-aso";
+import { fetchAllAdmins } from "./controllers/admin-controllers/fetch-all-admins";
+import { fetchAdminById } from "./controllers/admin-controllers/fetch-admin-by-id";
+import { updateAdmin } from "./controllers/admin-controllers/update-admin";
 
 export async function appRoutes(app: FastifyInstance) {
   // employees requests
@@ -60,6 +63,9 @@ export async function appRoutes(app: FastifyInstance) {
 
   // admin requests
   app.post("/admins", createAdmin);
+  app.get("/admins", fetchAllAdmins);
+  app.get("/admins/:id", fetchAdminById);
+  app.put("/admins/update/:id", updateAdmin);
 
   // auth
   app.post("/login", authenticateUser);
