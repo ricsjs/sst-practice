@@ -26,20 +26,24 @@ import { fetchAllExams } from "./controllers/exam-controllers.ts/fetch-all-exams
 import { deleteExam } from "./controllers/exam-controllers.ts/delete-exam";
 import { fetchExamById } from "./controllers/exam-controllers.ts/fetch-exam-by-id";
 import { updateExam } from "./controllers/exam-controllers.ts/update-exam";
+import { fetchAllProfessionals } from "./controllers/professional-controllers.ts/fetch-all-professionals";
+import { fetchProfessionalById } from "./controllers/professional-controllers.ts/fetch-professional-by-id";
+import { deleteProfessional } from "./controllers/professional-controllers.ts/delete-professional";
+import { updateProfessional } from "./controllers/professional-controllers.ts/update-professional";
 
 export async function appRoutes(app: FastifyInstance) {
   // employees requests
   app.post("/employees", createEmployee);
   app.get("/employees/:companyId", fetchAllEmployees);
   app.get("/employee/:id", fetchEmployeeById);
-  app.put("/employees/:id", deleteEmployees);
+  app.put("/employee/delete/:id", deleteEmployees);
   app.put("/employees/update/:id", updateEmployees);
 
   // companies requests
   app.post("/companies", createCompany);
   app.get("/companies", fetchAllCompanies);
   app.get("/companies/:id", deleteCompany);
-  app.put("/companies/delete/:id", deleteCompany);
+  app.put("/companie/delete/:id", deleteCompany);
   app.put("/companies/update/:id", updateCompany);
 
   // units requests
@@ -47,24 +51,28 @@ export async function appRoutes(app: FastifyInstance) {
   app.get("/units/:companyId", fetchAllUnits);
   app.get("/unit/:id", fetchUnitById);
   app.put("/unit/update/:id", updateUnit);
-  app.put("/unit/:id", deleteUnit);
+  app.put("/unit/delete/:id", deleteUnit);
 
   // professionals requests
   app.post("/professionals", createProfessional);
+  app.get("/professionals", fetchAllProfessionals);
+  app.get("/professional/:id", fetchProfessionalById);
+  app.put("/professional/delete/:id", deleteProfessional);
+  app.put("/professional/update/:id", updateProfessional);
 
   // asos requests
   app.post("/asos", createAso);
   app.get("/asos", fetchAllAsos);
   app.get("/aso/:id", fetchAsoById);
   app.put("/aso/update/:id", updateAso);
-  app.put("/aso/:id", deleteAso);
+  app.put("/aso/delete/:id", deleteAso);
 
   // exams requests
   app.post("/exams", createExam);
-  app.get("/exams", fetchAllExams)
-  app.get("/exam/:id", fetchExamById)
-  app.put("/exam/update/:id", updateExam)
-  app.delete("/exam/delete/:id", deleteExam)
+  app.get("/exams", fetchAllExams);
+  app.get("/exam/:id", fetchExamById);
+  app.put("/exam/update/:id", updateExam);
+  app.delete("/exam/delete/:id", deleteExam);
 
   // admin requests
   app.post("/admins", createAdmin);

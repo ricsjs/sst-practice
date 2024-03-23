@@ -4,7 +4,11 @@ import { ProfesssionalsRepository } from "../professionals-repository"
 
 export class PrismaProfessionalsRepository implements ProfesssionalsRepository {
     async findMany(): Promise<Profissional[]> {
-        const professionals = await prisma.profissional.findMany();
+        const professionals = await prisma.profissional.findMany({
+            where: {
+                active: true
+            }
+        });
 
         return professionals;
     }
@@ -32,12 +36,12 @@ export class PrismaProfessionalsRepository implements ProfesssionalsRepository {
 
     async delete(id: string): Promise<void> {
         await prisma.profissional.update({
-          where: { id },
-          data: {
-            active: false,
-          },
+            where: { id },
+            data: {
+                active: false,
+            },
         });
-      }
+    }
 
     async create(data: Prisma.ProfissionalCreateInput) {
         const professional = await prisma.profissional.create({

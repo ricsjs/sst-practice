@@ -1,5 +1,4 @@
 import { Profissional } from "@prisma/client";
-import { CompaniesRepository } from "../../repositories/companies-repository";
 import { ProfesssionalsRepository } from "../../repositories/professionals-repository";
 
 interface UpdateProfessionalServiceRequest {
