@@ -3,12 +3,8 @@ import { Exam, Prisma } from "@prisma/client"
 import { ExamsRepository } from "../exams-repository"
 
 export class PrismaExamsRepository implements ExamsRepository {
-    async findMany(examId: string): Promise<Exam[]> {
-        const exams = await prisma.exam.findMany({
-            where: {
-                id: examId
-            }
-        });
+    async findMany(): Promise<Exam[]> {
+        const exams = await prisma.exam.findMany();
 
         return exams;
     }
