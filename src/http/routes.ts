@@ -22,6 +22,10 @@ import { fetchAllAsos } from "./controllers/aso-controllers/fetch-all-asos";
 import { fetchAsoById } from "./controllers/aso-controllers/fetch-aso-by-id";
 import { updateAso } from "./controllers/aso-controllers/update-aso";
 import { deleteAso } from "./controllers/aso-controllers/delete-aso";
+import { fetchAllExams } from "./controllers/exam-controllers.ts/fetch-all-exams";
+import { deleteExam } from "./controllers/exam-controllers.ts/delete-exam";
+import { fetchExamById } from "./controllers/exam-controllers.ts/fetch-exam-by-id";
+import { updateExam } from "./controllers/exam-controllers.ts/update-exam";
 
 export async function appRoutes(app: FastifyInstance) {
   // employees requests
@@ -57,6 +61,10 @@ export async function appRoutes(app: FastifyInstance) {
 
   // exams requests
   app.post("/exams", createExam);
+  app.get("/exams", fetchAllExams)
+  app.get("/exam/:id", fetchExamById)
+  app.put("/exam/update/:id", updateExam)
+  app.delete("/exam/delete/:id", deleteExam)
 
   // admin requests
   app.post("/admins", createAdmin);
