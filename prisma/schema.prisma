@@ -174,7 +174,9 @@ model Aso {
   technical_manager_fullname String
   technical_manager_function String
   technical_manager_crm      String
-  Exam                       Exam[]
+
+  active Boolean
+  Exam   Exam[]
 
   @@map("asos")
 }
