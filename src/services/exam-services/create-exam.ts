@@ -1,5 +1,4 @@
-import { Empregado, Exam } from "@prisma/client"
-import { EmployeesRepository } from "../../repositories/employees-repository"
+import { Exam } from "@prisma/client"
 import { ExamsRepository } from "../../repositories/exams-repository"
 
 interface CreateExamServiceRequest {
