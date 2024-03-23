@@ -1,5 +1,4 @@
 import { Profissional } from "@prisma/client"
-import { ExamsRepository } from "../../repositories/exams-repository"
 import { ProfesssionalsRepository } from "../../repositories/professionals-repository";
 
 interface FetchAllProfessionalsServiceResponse {

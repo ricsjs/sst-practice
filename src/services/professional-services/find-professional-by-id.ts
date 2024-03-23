@@ -1,23 +1,22 @@
 import { Profissional } from "@prisma/client"
-import { ExamsRepository } from "../../repositories/exams-repository"
 import { ProfesssionalsRepository } from "../../repositories/professionals-repository"
 
-interface FindProfessionalByIdServiceRequest {
+interface FetchProfessionalByIdServiceRequest {
     id: string
 }
 
-interface FindProfessionalByIdServiceResponse {
+interface FetchProfessionalByIdServiceResponse {
     professional: Profissional | null
 }
 
-export class FindProfessionalByIdService {
+export class FetchProfessionalByIdService {
     constructor(
         private professionalsRepository: ProfesssionalsRepository,
     ) { }
 
     async execute({
         id
-    }: FindProfessionalByIdServiceRequest): Promise<FindProfessionalByIdServiceResponse> {
+    }: FetchProfessionalByIdServiceRequest): Promise<FetchProfessionalByIdServiceResponse> {
 
         const professional = await this.professionalsRepository.findById(id)
 
