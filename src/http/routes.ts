@@ -33,6 +33,7 @@ import { fetchAllExams } from "./controllers/exam-controllers.ts/fetch-all-exams
 import { fetchExamById } from "./controllers/exam-controllers.ts/fetch-exam-by-id";
 import { updateExam } from "./controllers/exam-controllers.ts/update-exam";
 import { deleteExam } from "./controllers/exam-controllers.ts/delete-exam";
+import { profile } from "./controllers/get-user-profile";
 
 export async function appRoutes(app: FastifyInstance) {
   // employees requests
@@ -85,4 +86,5 @@ export async function appRoutes(app: FastifyInstance) {
 
   // auth
   app.post("/login", authenticateUser);
+  app.get("/profile", profile);
 }
