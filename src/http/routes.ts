@@ -22,20 +22,17 @@ import { fetchAllAsos } from "./controllers/aso-controllers/fetch-all-asos";
 import { fetchAsoById } from "./controllers/aso-controllers/fetch-aso-by-id";
 import { updateAso } from "./controllers/aso-controllers/update-aso";
 import { deleteAso } from "./controllers/aso-controllers/delete-aso";
-<<<<<<< HEAD
 import { fetchAllAdmins } from "./controllers/admin-controllers/fetch-all-admins";
 import { fetchAdminById } from "./controllers/admin-controllers/fetch-admin-by-id";
 import { updateAdmin } from "./controllers/admin-controllers/update-admin";
-=======
-import { fetchAllExams } from "./controllers/exam-controllers.ts/fetch-all-exams";
-import { deleteExam } from "./controllers/exam-controllers.ts/delete-exam";
-import { fetchExamById } from "./controllers/exam-controllers.ts/fetch-exam-by-id";
-import { updateExam } from "./controllers/exam-controllers.ts/update-exam";
 import { fetchAllProfessionals } from "./controllers/professional-controllers.ts/fetch-all-professionals";
 import { fetchProfessionalById } from "./controllers/professional-controllers.ts/fetch-professional-by-id";
 import { deleteProfessional } from "./controllers/professional-controllers.ts/delete-professional";
 import { updateProfessional } from "./controllers/professional-controllers.ts/update-professional";
->>>>>>> 9895f61442d11ecb6bc9306fee0111785aeb1ea0
+import { fetchAllExams } from "./controllers/exam-controllers.ts/fetch-all-exams";
+import { fetchExamById } from "./controllers/exam-controllers.ts/fetch-exam-by-id";
+import { updateExam } from "./controllers/exam-controllers.ts/update-exam";
+import { deleteExam } from "./controllers/exam-controllers.ts/delete-exam";
 
 export async function appRoutes(app: FastifyInstance) {
   // employees requests

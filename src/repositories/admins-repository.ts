@@ -5,5 +5,5 @@ export interface AdminsRepository {
   findMany(): Promise<Admin[]>;
   findById(id: string): Promise<Admin | null>;
   findByUserId(userId: string): Promise<Admin | null>;
-  update(company: Admin): Promise<Admin>;
+  update(admin: Admin): Promise<Admin>;
 }
