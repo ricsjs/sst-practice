@@ -23,6 +23,16 @@ export class PrismaProfessionalsRepository implements ProfesssionalsRepository {
         return professional
     }
 
+    async findByUserId(userId: string) {
+        const professional = await prisma.profissional.findFirst({
+            where: {
+                userId: userId
+            }
+        })
+
+        return professional
+    }
+
     async update(data: Profissional) {
         const professional = await prisma.profissional.update({
             where: {

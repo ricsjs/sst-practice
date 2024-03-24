@@ -21,6 +21,16 @@ export class PrismaCompaniesRepository implements CompaniesRepository {
     return company;
   }
 
+  async findByUserId(userId: string) {
+    const company = await prisma.empresa.findFirst({
+      where: {
+        userId,
+      },
+    });
+
+    return company;
+  }
+
   async update(data: Empresa) {
     const company = await prisma.empresa.update({
       where: {
