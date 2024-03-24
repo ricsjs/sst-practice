@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { UserAlreadyExistsError } from "../../../services/errors/user-already-exists-error";
-import { makeCreateCompanyService } from "../../../services/factories/company-services/make-create-company-service";
+import { makeCreateCompanyService } from "../../../services/factories/company-factories/make-create-company-service";
 
 export async function createCompany(
   request: FastifyRequest,

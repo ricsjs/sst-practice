@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { makeDeleteCompanyService } from "../../../services/factories/company-services/make-delete-company-service";
+import { makeDeleteCompanyService } from "../../../services/factories/company-factories/make-delete-company-service";
 
 export async function deleteCompany(
   request: FastifyRequest,

@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { makeUpdateCompanyService } from "../../../services/factories/company-services/make-update-company";
+import { makeUpdateCompanyService } from "../../../services/factories/company-factories/make-update-company";
 
 export async function updateCompany(
   request: FastifyRequest,
@@ -8,8 +8,6 @@ export async function updateCompany(
 ) {
   const updateCompanyBodySchema = z.object({
     userId: z.string(),
-    email: z.string().email(),
-    password: z.string().min(6),
     cnpj: z.string(),
     corporate_reason: z.string(),
     fantasy_name: z.string(),

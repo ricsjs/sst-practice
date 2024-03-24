@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { makeListCompaniesService } from "../../../services/factories/company-services/make-fetch-all-companies";
+import { makeListCompaniesService } from "../../../services/factories/company-factories/make-fetch-all-companies";
 
 export async function fetchAllCompanies(
   request: FastifyRequest,
