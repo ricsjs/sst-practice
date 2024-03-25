@@ -13,10 +13,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  PROFESSIONAL
+  COMPANY
+}
+
 model User {
   id            String         @id @default(uuid())
   email         String         @unique
   password_hash String
+  role          Role           @default(ADMIN)
   type          String
   created_at    DateTime       @default(now())
   Admin         Admin[]

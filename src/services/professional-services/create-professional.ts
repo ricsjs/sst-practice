@@ -44,11 +44,13 @@ export class CreateProfessionalService {
         }
 
         const userType = "professional"
+        const userRole = "PROFESSIONAL"
 
         const user = await this.usersRepository.create({
             email,
             password_hash,
-            type: userType
+            type: userType,
+            role: userRole
         })
 
         const professional = await this.professionalsRepository.create({

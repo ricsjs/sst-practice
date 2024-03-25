@@ -33,56 +33,60 @@ import { fetchExamById } from "../controllers/exam-controllers/fetch-exam-by-id"
 import { updateExam } from "../controllers/exam-controllers/update-exam";
 import { deleteExam } from "../controllers/exam-controllers/delete-exam";
 import { verifyJWT } from "../middlewares/jwt-verify";
+import { verifyUserRole } from "../middlewares/verify-user-role";
+import { profile } from "../controllers/users-controllers/get-user-profile";
 
 export async function protectedRoutes(app: FastifyInstance) {
   app.addHook("onRequest", verifyJWT);
 
+  app.get("/profile", profile);
+
   // employees requests
-  app.post("/employees", createEmployee);
-  app.get("/employees/:companyId", fetchAllEmployees);
-  app.get("/employee/:id", fetchEmployeeById);
-  app.put("/employee/delete/:id", deleteEmployees);
-  app.put("/employees/update/:id", updateEmployees);
+  app.post("/employees", {onRequest: [verifyUserRole('COMPANY')]}, createEmployee);
+  app.get("/employees/:companyId", {onRequest: [verifyUserRole('COMPANY')]}, fetchAllEmployees);
+  app.get("/employee/:id", {onRequest: [verifyUserRole('COMPANY')]}, fetchEmployeeById);
+  app.put("/employee/delete/:id", {onRequest: [verifyUserRole('COMPANY')]}, deleteEmployees);
+  app.put("/employees/update/:id", {onRequest: [verifyUserRole('COMPANY')]}, updateEmployees);
 
   // companies requests
-  app.post("/companies", createCompany);
-  app.get("/companies", fetchAllCompanies);
-  app.get("/companies/:id", deleteCompany);
-  app.put("/companie/delete/:id", deleteCompany);
-  app.put("/companies/update/:id", updateCompany);
+  app.post("/companies", {onRequest: [verifyUserRole('ADMIN')]}, createCompany);
+  app.get("/companies", {onRequest: [verifyUserRole('ADMIN')]}, fetchAllCompanies);
+  app.get("/companies/:id", {onRequest: [verifyUserRole('ADMIN')]}, deleteCompany);
+  app.put("/companie/delete/:id", {onRequest: [verifyUserRole('ADMIN')]}, deleteCompany);
+  app.put("/companies/update/:id", {onRequest: [verifyUserRole('ADMIN')]}, updateCompany);
 
   // units requests
-  app.post("/units", createUnit);
-  app.get("/units/:companyId", fetchAllUnits);
-  app.get("/unit/:id", fetchUnitById);
-  app.put("/unit/update/:id", updateUnit);
-  app.put("/unit/delete/:id", deleteUnit);
+  app.post("/units", {onRequest: [verifyUserRole('COMPANY')]}, createUnit);
+  app.get("/units/:companyId", {onRequest: [verifyUserRole('COMPANY')]}, fetchAllUnits);
+  app.get("/unit/:id", {onRequest: [verifyUserRole('COMPANY')]}, fetchUnitById);
+  app.put("/unit/update/:id", {onRequest: [verifyUserRole('COMPANY')]}, updateUnit);
+  app.put("/unit/delete/:id", {onRequest: [verifyUserRole('COMPANY')]}, deleteUnit);
 
   // professionals requests
-  app.post("/professionals", createProfessional);
-  app.get("/professionals", fetchAllProfessionals);
-  app.get("/professional/:id", fetchProfessionalById);
-  app.put("/professional/delete/:id", deleteProfessional);
-  app.put("/professional/update/:id", updateProfessional);
+  app.post("/professionals", {onRequest: [verifyUserRole('ADMIN')]}, createProfessional);
+  app.get("/professionals", {onRequest: [verifyUserRole('ADMIN')]}, fetchAllProfessionals);
+  app.get("/professional/:id", {onRequest: [verifyUserRole('ADMIN')]}, fetchProfessionalById);
+  app.put("/professional/delete/:id", {onRequest: [verifyUserRole('ADMIN')]}, deleteProfessional);
+  app.put("/professional/update/:id", {onRequest: [verifyUserRole('ADMIN')]}, updateProfessional);
 
   // asos requests
-  app.post("/asos", createAso);
-  app.get("/asos", fetchAllAsos);
-  app.get("/aso/:id", fetchAsoById);
-  app.put("/aso/update/:id", updateAso);
-  app.put("/aso/delete/:id", deleteAso);
+  app.post("/asos", {onRequest: [verifyUserRole('PROFESSIONAL')]}, createAso);
+  app.get("/asos", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAllAsos);
+  app.get("/aso/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAsoById);
+  app.put("/aso/update/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, updateAso);
+  app.put("/aso/delete/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, deleteAso);
 
   // exams requests
-  app.post("/exams", createExam);
-  app.get("/exams", fetchAllExams);
-  app.get("/exam/:id", fetchExamById);
-  app.put("/exam/update/:id", updateExam);
-  app.delete("/exam/delete/:id", deleteExam);
+  app.post("/exams", {onRequest: [verifyUserRole('PROFESSIONAL')]}, createExam);
+  app.get("/exams", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAllExams);
+  app.get("/exam/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchExamById);
+  app.put("/exam/update/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, updateExam);
+  app.delete("/exam/delete/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, deleteExam);
 
   // admin requests
-  app.post("/admins", createAdmin);
-  app.get("/admins", fetchAllAdmins);
-  app.get("/admins/:id", fetchAdminById);
-  app.put("/admins/update/:id", updateAdmin);
+  app.post("/admins", {onRequest: [verifyUserRole('ADMIN')]}, createAdmin);
+  app.get("/admins", {onRequest: [verifyUserRole('ADMIN')]}, fetchAllAdmins);
+  app.get("/admins/:id", {onRequest: [verifyUserRole('ADMIN')]}, fetchAdminById);
+  app.put("/admins/update/:id", {onRequest: [verifyUserRole('ADMIN')]}, updateAdmin);
 
 }
