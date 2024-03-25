@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
-import { authenticateUser } from "../controllers/user-authenticate-controller";
-import { profile } from "../controllers/get-user-profile";
-import { refresh } from "../controllers/refresh";
+import { authenticateUser } from "../controllers/users-controllers/user-authenticate-controller";
+import { profile } from "../controllers/users-controllers/get-user-profile";
+import { refresh } from "../controllers/users-controllers/refresh";
 import { verifyJWT } from "../middlewares/jwt-verify";
 
 export async function publicRoutes(app: FastifyInstance) {
