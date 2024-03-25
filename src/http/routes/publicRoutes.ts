@@ -1,9 +1,9 @@
 import { FastifyInstance } from "fastify";
-import { authenticateUser } from "../controllers/user-authenticate-controller";
-import { profile } from "../controllers/get-user-profile";
+import { authenticateUser } from "../controllers/users-controllers/user-authenticate";
+import { refresh } from "../controllers/users-controllers/refresh";
 
 export async function publicRoutes(app: FastifyInstance) {
   // auth
+  app.patch('/token/refresh', refresh)
   app.post("/login", authenticateUser);
-  app.get("/profile", profile);
 }

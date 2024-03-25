@@ -1,9 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { makeGetUserProfileService } from "../../services/factories/user-factories/make-get-user-profile-service";
-import { makeFindProfessionalByUserIdService } from "../../services/factories/professional-factories/make-find-professional-by-user-id";
-import { makeFindAdminByUserIdService } from "../../services/factories/admin-factories/make-find-admin-by-user-id";
-import { makeFindCompanyByUserIdService } from "../../services/factories/company-factories/make-find-company-by-user-id";
-import { ResourceNotFoundError } from "../../services/errors/resource-not-found-error";
+import { makeGetUserProfileService } from "../../../services/factories/user-factories/make-get-user-profile-service";
+import { makeFindProfessionalByUserIdService } from "../../../services/factories/professional-factories/make-find-professional-by-user-id";
+import { makeFindAdminByUserIdService } from "../../../services/factories/admin-factories/make-find-admin-by-user-id";
+import { makeFindCompanyByUserIdService } from "../../../services/factories/company-factories/make-find-company-by-user-id";
+import { ResourceNotFoundError } from "../../../services/errors/resource-not-found-error";
 
 export async function profile(request: FastifyRequest, reply: FastifyReply) {
     await request.jwtVerify()

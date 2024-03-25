@@ -1,22 +1,21 @@
 import { FastifyInstance } from "fastify";
 import { createAdmin } from "../controllers/admin-controllers/create-admin";
-import { authenticateUser } from "../controllers/user-authenticate-controller";
-import { createCompany } from "../controllers/company-controllers.ts/create-company";
+import { createCompany } from "../controllers/company-controllers/create-company";
 import { createEmployee } from "../controllers/employee-controllers/create-employee";
-import { createProfessional } from "../controllers/professional-controllers.ts/create-professional";
-import { createUnit } from "../controllers/unit-controllers.ts/create-unit";
-import { createExam } from "../controllers/exam-controllers.ts/create-exam";
+import { createProfessional } from "../controllers/professional-controllers/create-professional";
+import { createUnit } from "../controllers/unit-controllers/create-unit";
+import { createExam } from "../controllers/exam-controllers/create-exam";
 import { createAso } from "../controllers/aso-controllers/create-aso";
 import { fetchAllEmployees } from "../controllers/employee-controllers/fetch-all-employees";
 import { deleteEmployees } from "../controllers/employee-controllers/delete-employee";
 import { updateEmployees } from "../controllers/employee-controllers/update-employee";
-import { fetchAllUnits } from "../controllers/unit-controllers.ts/fetch-all-units";
-import { fetchUnitById } from "../controllers/unit-controllers.ts/fetch-unit-by-id";
-import { updateUnit } from "../controllers/unit-controllers.ts/update-unit";
-import { deleteUnit } from "../controllers/unit-controllers.ts/delete-unit";
-import { fetchAllCompanies } from "../controllers/company-controllers.ts/fetch-all-companies";
-import { deleteCompany } from "../controllers/company-controllers.ts/delete-company";
-import { updateCompany } from "../controllers/company-controllers.ts/update-company";
+import { fetchAllUnits } from "../controllers/unit-controllers/fetch-all-units";
+import { fetchUnitById } from "../controllers/unit-controllers/fetch-unit-by-id";
+import { updateUnit } from "../controllers/unit-controllers/update-unit";
+import { deleteUnit } from "../controllers/unit-controllers/delete-unit";
+import { fetchAllCompanies } from "../controllers/company-controllers/fetch-all-companies";
+import { deleteCompany } from "../controllers/company-controllers/delete-company";
+import { updateCompany } from "../controllers/company-controllers/update-company";
 import { fetchEmployeeById } from "../controllers/employee-controllers/fetch-employee-by-id";
 import { fetchAllAsos } from "../controllers/aso-controllers/fetch-all-asos";
 import { fetchAsoById } from "../controllers/aso-controllers/fetch-aso-by-id";
@@ -25,65 +24,69 @@ import { deleteAso } from "../controllers/aso-controllers/delete-aso";
 import { fetchAllAdmins } from "../controllers/admin-controllers/fetch-all-admins";
 import { fetchAdminById } from "../controllers/admin-controllers/fetch-admin-by-id";
 import { updateAdmin } from "../controllers/admin-controllers/update-admin";
-import { fetchAllProfessionals } from "../controllers/professional-controllers.ts/fetch-all-professionals";
-import { fetchProfessionalById } from "../controllers/professional-controllers.ts/fetch-professional-by-id";
-import { deleteProfessional } from "../controllers/professional-controllers.ts/delete-professional";
-import { updateProfessional } from "../controllers/professional-controllers.ts/update-professional";
-import { fetchAllExams } from "../controllers/exam-controllers.ts/fetch-all-exams";
-import { fetchExamById } from "../controllers/exam-controllers.ts/fetch-exam-by-id";
-import { updateExam } from "../controllers/exam-controllers.ts/update-exam";
-import { deleteExam } from "../controllers/exam-controllers.ts/delete-exam";
+import { fetchAllProfessionals } from "../controllers/professional-controllers/fetch-all-professionals";
+import { fetchProfessionalById } from "../controllers/professional-controllers/fetch-professional-by-id";
+import { deleteProfessional } from "../controllers/professional-controllers/delete-professional";
+import { updateProfessional } from "../controllers/professional-controllers/update-professional";
+import { fetchAllExams } from "../controllers/exam-controllers/fetch-all-exams";
+import { fetchExamById } from "../controllers/exam-controllers/fetch-exam-by-id";
+import { updateExam } from "../controllers/exam-controllers/update-exam";
+import { deleteExam } from "../controllers/exam-controllers/delete-exam";
 import { verifyJWT } from "../middlewares/jwt-verify";
+import { verifyUserRole } from "../middlewares/verify-user-role";
+import { profile } from "../controllers/users-controllers/get-user-profile";
 
 export async function protectedRoutes(app: FastifyInstance) {
   app.addHook("onRequest", verifyJWT);
 
+  app.get("/profile", profile);
+
   // employees requests
-  app.post("/employees", createEmployee);
-  app.get("/employees/:companyId", fetchAllEmployees);
-  app.get("/employee/:id", fetchEmployeeById);
-  app.put("/employee/delete/:id", deleteEmployees);
-  app.put("/employees/update/:id", updateEmployees);
+  app.post("/employees", {onRequest: [verifyUserRole('COMPANY')]}, createEmployee);
+  app.get("/employees/:companyId", {onRequest: [verifyUserRole('COMPANY')]}, fetchAllEmployees);
+  app.get("/employee/:id", {onRequest: [verifyUserRole('COMPANY')]}, fetchEmployeeById);
+  app.put("/employee/delete/:id", {onRequest: [verifyUserRole('COMPANY')]}, deleteEmployees);
+  app.put("/employees/update/:id", {onRequest: [verifyUserRole('COMPANY')]}, updateEmployees);
 
   // companies requests
-  app.post("/companies", createCompany);
-  app.get("/companies", fetchAllCompanies);
-  app.get("/companies/:id", deleteCompany);
-  app.put("/companie/delete/:id", deleteCompany);
-  app.put("/companies/update/:id", updateCompany);
+  app.post("/companies", {onRequest: [verifyUserRole('ADMIN')]}, createCompany);
+  app.get("/companies", {onRequest: [verifyUserRole('ADMIN')]}, fetchAllCompanies);
+  app.get("/companies/:id", {onRequest: [verifyUserRole('ADMIN')]}, deleteCompany);
+  app.put("/companie/delete/:id", {onRequest: [verifyUserRole('ADMIN')]}, deleteCompany);
+  app.put("/companies/update/:id", {onRequest: [verifyUserRole('ADMIN')]}, updateCompany);
 
   // units requests
-  app.post("/units", createUnit);
-  app.get("/units/:companyId", fetchAllUnits);
-  app.get("/unit/:id", fetchUnitById);
-  app.put("/unit/update/:id", updateUnit);
-  app.put("/unit/delete/:id", deleteUnit);
+  app.post("/units", {onRequest: [verifyUserRole('COMPANY')]}, createUnit);
+  app.get("/units/:companyId", {onRequest: [verifyUserRole('COMPANY')]}, fetchAllUnits);
+  app.get("/unit/:id", {onRequest: [verifyUserRole('COMPANY')]}, fetchUnitById);
+  app.put("/unit/update/:id", {onRequest: [verifyUserRole('COMPANY')]}, updateUnit);
+  app.put("/unit/delete/:id", {onRequest: [verifyUserRole('COMPANY')]}, deleteUnit);
 
   // professionals requests
-  app.post("/professionals", createProfessional);
-  app.get("/professionals", fetchAllProfessionals);
-  app.get("/professional/:id", fetchProfessionalById);
-  app.put("/professional/delete/:id", deleteProfessional);
-  app.put("/professional/update/:id", updateProfessional);
+  app.post("/professionals", {onRequest: [verifyUserRole('ADMIN')]}, createProfessional);
+  app.get("/professionals", {onRequest: [verifyUserRole('ADMIN')]}, fetchAllProfessionals);
+  app.get("/professional/:id", {onRequest: [verifyUserRole('ADMIN')]}, fetchProfessionalById);
+  app.put("/professional/delete/:id", {onRequest: [verifyUserRole('ADMIN')]}, deleteProfessional);
+  app.put("/professional/update/:id", {onRequest: [verifyUserRole('ADMIN')]}, updateProfessional);
 
   // asos requests
-  app.post("/asos", createAso);
-  app.get("/asos", fetchAllAsos);
-  app.get("/aso/:id", fetchAsoById);
-  app.put("/aso/update/:id", updateAso);
-  app.put("/aso/delete/:id", deleteAso);
+  app.post("/asos", {onRequest: [verifyUserRole('PROFESSIONAL')]}, createAso);
+  app.get("/asos", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAllAsos);
+  app.get("/aso/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAsoById);
+  app.put("/aso/update/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, updateAso);
+  app.put("/aso/delete/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, deleteAso);
 
   // exams requests
-  app.post("/exams", createExam);
-  app.get("/exams", fetchAllExams);
-  app.get("/exam/:id", fetchExamById);
-  app.put("/exam/update/:id", updateExam);
-  app.delete("/exam/delete/:id", deleteExam);
+  app.post("/exams", {onRequest: [verifyUserRole('PROFESSIONAL')]}, createExam);
+  app.get("/exams", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAllExams);
+  app.get("/exam/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchExamById);
+  app.put("/exam/update/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, updateExam);
+  app.delete("/exam/delete/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, deleteExam);
 
   // admin requests
-  app.post("/admins", createAdmin);
-  app.get("/admins", fetchAllAdmins);
-  app.get("/admins/:id", fetchAdminById);
-  app.put("/admins/update/:id", updateAdmin);
+  app.post("/admins", {onRequest: [verifyUserRole('ADMIN')]}, createAdmin);
+  app.get("/admins", {onRequest: [verifyUserRole('ADMIN')]}, fetchAllAdmins);
+  app.get("/admins/:id", {onRequest: [verifyUserRole('ADMIN')]}, fetchAdminById);
+  app.put("/admins/update/:id", {onRequest: [verifyUserRole('ADMIN')]}, updateAdmin);
 
 }

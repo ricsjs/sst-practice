@@ -41,11 +41,13 @@ export class CreateCompanyService {
         }
 
         const userType = "company"
+        const userRole = "COMPANY"
 
         const user = await this.usersRepository.create({
             email,
             password_hash,
-            type: userType
+            type: userType,
+            role: userRole
         })
 
         const company = await this.companiesRepository.create({

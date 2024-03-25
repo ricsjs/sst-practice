@@ -32,11 +32,13 @@ export class CreateAdminService {
         }
 
         const userType = "admin"
+        const userRole = "ADMIN" 
 
         const user = await this.usersRepository.create({
             email,
             password_hash,
-            type: userType
+            type: userType,
+            role: userRole
         })
 
         const admin = await this.adminsRepository.create({
