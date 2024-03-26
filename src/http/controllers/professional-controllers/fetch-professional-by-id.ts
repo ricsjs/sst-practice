@@ -1,20 +1,20 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { NoRecordsFoundError } from "../../../services/errors/no-records-found-error"
 import { z } from "zod"
-import { makeFetchProfessionalByIdService } from "../../../services/factories/professional-factories/make-fetch-professional-by-id"
+import { makeFindProfessionalByUserIdService } from "../../../services/factories/professional-factories/make-find-professional-by-user-id"
 
 export async function fetchProfessionalById(request: FastifyRequest, reply: FastifyReply) {
     const fetchProfessionalByIdSchema = z.object({
-        id: z.string()
+        userId: z.string()
     })
 
     try {
 
-        const { id } = fetchProfessionalByIdSchema.parse(request.params)
+        const { userId } = fetchProfessionalByIdSchema.parse(request.params)
 
-        const fetchProfessionalByIdService = makeFetchProfessionalByIdService()
+        const findProfessionalByIdService = makeFindProfessionalByUserIdService()
 
-        const { professional } =  await fetchProfessionalByIdService.execute({ id })
+        const { professional } =  await findProfessionalByIdService.execute({ userId })
 
         return reply.status(200).send({ professional })
     } catch (error) {
