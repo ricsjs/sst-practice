@@ -1,5 +1,6 @@
 import { Aso } from "@prisma/client"
 import { AsosRepository } from "../../repositories/asos-repository"
+import { CardsRepository } from "../../repositories/cards-repository"
 
 interface CreateAsoServiceRequest {
     companyId: string
@@ -48,6 +49,7 @@ interface CreateAsoServiceResponse {
 export class CreateAsoService {
     constructor(
         private asosRepository: AsosRepository,
+        private cardsRepository: CardsRepository
     ) { }
 
     async execute({
@@ -81,6 +83,13 @@ export class CreateAsoService {
             technical_manager_function,
             technical_manager_crm,
             active
+        })
+
+        await this.cardsRepository.create({
+            professional: { connect: { id: profissionalId } },
+            employee: { connect: { id: employeeId } },
+            company: { connect: { id: companyId } },
+            aso: { connect: { id: aso.id } }
         })
 
         return {

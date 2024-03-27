@@ -1,7 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { NoRecordsFoundError } from "../../../services/errors/no-records-found-error"
 import { z } from "zod"
-import { makeFetchCompanyByIdService } from "../../../services/factories/company-factories/make-fetch-company-by-id"
 import { makeFetchAsoByIdService } from "../../../services/factories/aso-factories/make-fetch-aso-by-id"
 
 export async function fetchAsoById(request: FastifyRequest, reply: FastifyReply) {
