@@ -71,7 +71,7 @@ export async function protectedRoutes(app: FastifyInstance) {
 
   // asos requests
   app.post("/asos", {onRequest: [verifyUserRole('PROFESSIONAL')]}, createAso);
-  app.get("/asos", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAllAsos);
+  app.get("/asos/:companyId", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAllAsos);
   app.get("/aso/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, fetchAsoById);
   app.put("/aso/update/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, updateAso);
   app.put("/aso/delete/:id", {onRequest: [verifyUserRole('PROFESSIONAL')]}, deleteAso);

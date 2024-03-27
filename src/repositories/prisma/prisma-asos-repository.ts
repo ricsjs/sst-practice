@@ -3,10 +3,11 @@ import { Aso, Prisma } from "@prisma/client"
 import { AsosRepository } from "../asos-repository"
 
 export class PrismaAsosRepository implements AsosRepository {
-    async findMany(): Promise<Aso[]> {
+    async findMany(companyId: string): Promise<Aso[]> {
         const asos = await prisma.aso.findMany({
             where: {
-                active: true,
+                empresaId: companyId,
+                active: true
             }
         });
 
