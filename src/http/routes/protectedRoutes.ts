@@ -35,6 +35,8 @@ import { deleteExam } from "../controllers/exam-controllers/delete-exam";
 import { verifyJWT } from "../middlewares/jwt-verify";
 import { verifyUserRole } from "../middlewares/verify-user-role";
 import { profile } from "../controllers/users-controllers/get-user-profile";
+import { fetchAllCards } from "../controllers/card-controllers/fetch-all-cards";
+import { fetchCardById } from "../controllers/card-controllers/fetch-card-by-id";
 
 export async function protectedRoutes(app: FastifyInstance) {
   app.addHook("onRequest", verifyJWT);
@@ -89,4 +91,7 @@ export async function protectedRoutes(app: FastifyInstance) {
   app.get("/admins/:id", {onRequest: [verifyUserRole('ADMIN')]}, fetchAdminById);
   app.put("/admins/update/:id", {onRequest: [verifyUserRole('ADMIN')]}, updateAdmin);
 
+  // cards requests
+  app.get("/cards/:companyId", {onRequest: [verifyUserRole('COMPANY')]}, fetchAllCards);
+  app.get("/card/:id", {onRequest: [verifyUserRole('COMPANY')]}, fetchCardById);
 }
