@@ -60,13 +60,13 @@ SST Practice
 
 ---
 
-- **Endpoint:** `/companie/delete/:id`
+- **Endpoint:** `/employee/delete/:id`
 - **Método:** PUT
-- **Descrição:** Delete um funcionário.
+- **Descrição:** Deleta um funcionário.
 
 ---
 
-- **Endpoint:** `/companies/update/:id`
+- **Endpoint:** `/employees/update/:id`
 - **Método:** PUT
 - **Descrição:** Faz a edição de um funcionário.
 - **Corpo da requisição:**
