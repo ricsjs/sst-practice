@@ -46,17 +46,25 @@ SST Practice
 }
 ```
 
+---
+
 - **Endpoint:** `/employees/:companyId`
 - **Método:** GET
 - **Descrição:** Retorna todos os funcionários de uma empresa.
+
+---
 
 - **Endpoint:** `/employee/:id`
 - **Método:** GET
 - **Descrição:** Retorna um funcionário pelo ID.
 
+---
+
 - **Endpoint:** `/companie/delete/:id`
 - **Método:** PUT
 - **Descrição:** Delete um funcionário.
+
+---
 
 - **Endpoint:** `/companies/update/:id`
 - **Método:** PUT
