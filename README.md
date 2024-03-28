@@ -59,8 +59,8 @@ SST Practice
 - **Descrição:** Delete um funcionário.
 
 - **Endpoint:** `/companies/update/:id`
-- **Método:** POST
-- **Descrição:** Faz a criação de um funcionário.
+- **Método:** PUT
+- **Descrição:** Faz a edição de um funcionário.
 - **Corpo da requisição:**
 ```json
 {
