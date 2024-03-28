@@ -13,15 +13,70 @@ SST Practice
 - **Corpo da requisição:**
 ```json
 {
-  "email": "example_username",
-  "password": "example_password"
+  "email": "email@email.com",
+  "password": "123456"
 }
 ```
+
+## Rotas privadas
 
 ## Perfil
 - **Endpoint:** `/profile`
 - **Método:** GET
 - **Descrição:** Retorna o perfil do usuário.
+
+## Funcionários
+- **Endpoint:** `/employees`
+- **Método:** POST
+- **Descrição:** Faz a criação de um funcionário.
+- **Corpo da requisição:**
+```json
+{
+    "companyId": "id_empresa",
+    "name" : "nome",
+    "cpf" : "cpf",
+    "nis" : "nis",
+    "rg" : "rg",
+    "br_pdh" : "br_pdh",
+    "sex" : "sex",
+    "dt_birth" : "dt_birth",
+    "phone" : "phone",
+    "phone_number" : "phone_number",
+    "blood_type" : "blood_type"
+}
+```
+
+- **Endpoint:** `/employees/:companyId`
+- **Método:** GET
+- **Descrição:** Retorna todos os funcionários de uma empresa.
+
+- **Endpoint:** `/employee/:id`
+- **Método:** GET
+- **Descrição:** Retorna um funcionário pelo ID.
+
+- **Endpoint:** `/companie/delete/:id`
+- **Método:** PUT
+- **Descrição:** Delete um funcionário.
+
+- **Endpoint:** `/companies/update/:id`
+- **Método:** POST
+- **Descrição:** Faz a criação de um funcionário.
+- **Corpo da requisição:**
+```json
+{
+    "name": "nome",
+    "cpf": "cpf",
+    "nis": "nis",
+    "rg": "rg",
+    "br_pdh": "br_pdh",
+    "sex": "sex",
+    "dt_birth": "dt_birth",
+    "phone": "phone",
+    "phone_number": "phone number",
+    "blood_type": "blood_type",
+    "companyId": "id_empresa"
+}
+```
 
 ## RF
 
