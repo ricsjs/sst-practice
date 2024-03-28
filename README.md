@@ -18,6 +18,11 @@ SST Practice
 }
 ```
 
+## Perfil
+- **Endpoint:** `/profile`
+- **Método:** GET
+- **Descrição:** Retorna o perfil do usuário.
+
 ## RF
 
 - [x] Deve ser possível os usuários acessarem o sistema;
