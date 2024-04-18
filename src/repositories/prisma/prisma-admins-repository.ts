@@ -42,9 +42,16 @@ export class PrismaAdminsRepository implements AdminsRepository {
     return admin;
   }
 
-  async findMany(): Promise<Admin[]> {
-    const admin = await prisma.admin.findMany();
-
-    return admin;
+  async findMany(): Promise<(Admin & { user: { email: string } })[]> {
+    const admins = await prisma.admin.findMany({
+      include: {
+        user: {
+          select: {
+            email: true
+          }
+        }
+      }
+    });
+    return admins;
   }
 }

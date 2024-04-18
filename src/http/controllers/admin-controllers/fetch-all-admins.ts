@@ -10,7 +10,7 @@ export async function fetchAllAdmins(
 
     const { admins } = await listAdminsService.execute();
 
-    return reply.status(200).send({ admins });
+    return reply.status(200).send({ admins: admins });
   } catch (error) {
     console.error(error);
     return reply.status(500).send({ message: "Internal Server Error" });

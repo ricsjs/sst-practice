@@ -1,5 +1,4 @@
-import { Admin, Empresa } from "@prisma/client";
-import { CompaniesRepository } from "../../repositories/companies-repository";
+import { Admin } from "@prisma/client";
 import { AdminsRepository } from "../../repositories/admins-repository";
 
 interface FetchAllAdminsServiceResponse {
