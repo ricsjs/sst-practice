@@ -8,15 +8,31 @@ import fastifyCookie from "@fastify/cookie";
 
 export const app = fastify();
 
+app.addHook("preHandler", (req, res, done) => {
+  // Adiciona cabeçalhos CORS apenas se a origem da requisição for permitida
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "POST");
+  res.header("Access-Control-Allow-Headers", "*");
+
+  // Verifica se a requisição é uma pré-verificação (preflight)
+  const isPreflight = req.method === "OPTIONS";
+  if (isPreflight) {
+    // Retorna uma resposta vazia para pré-verificação (preflight)
+    return res.send();
+  }
+
+  done();
+});
+
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
   cookie: {
-      cookieName: 'refreshToken',
-      signed: false,
+    cookieName: "refreshToken",
+    signed: false,
   },
   sign: {
-      expiresIn: '10m',
-  }
+    expiresIn: "10m",
+  },
 });
 
 app.register(fastifyCookie);
