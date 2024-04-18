@@ -3,15 +3,23 @@ import { Prisma, Profissional } from "@prisma/client"
 import { ProfesssionalsRepository } from "../professionals-repository"
 
 export class PrismaProfessionalsRepository implements ProfesssionalsRepository {
-    async findMany(): Promise<Profissional[]> {
+    async findMany(): Promise<(Profissional & { user: { email: string } })[]> {
         const professionals = await prisma.profissional.findMany({
             where: {
                 active: true
+            },
+            include: {
+                user: {
+                    select: {
+                        email: true
+                    }
+                }
             }
         });
 
         return professionals;
     }
+
 
     async findById(id: string) {
         const professional = await prisma.profissional.findUnique({
