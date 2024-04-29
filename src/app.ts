@@ -12,6 +12,7 @@ app.addHook("preHandler", (req, res, done) => {
   // Adiciona cabeçalhos CORS apenas se a origem da requisição for permitida
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "POST");
+  res.header("Access-Control-Allow-Methods", "PUT");
   res.header("Access-Control-Allow-Headers", "*");
 
   // Verifica se a requisição é uma pré-verificação (preflight)
