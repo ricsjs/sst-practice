@@ -16,6 +16,13 @@ export class PrismaAdminsRepository implements AdminsRepository {
       where: {
         id,
       },
+      include: {
+        user: {
+          select: {
+            email: true
+          }
+        }
+      }
     });
 
     return admin;
@@ -26,6 +33,13 @@ export class PrismaAdminsRepository implements AdminsRepository {
       where: {
         userId,
       },
+      include: {
+        user: {
+          select: {
+            email: true
+          }
+        }
+      }
     });
 
     return admin;
