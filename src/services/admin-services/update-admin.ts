@@ -33,10 +33,11 @@ export class UpdateAdminService {
       if (password) {
         const hashedPassword = await hash(password, 6);
         await this.usersRepository.update({
+          id: user.id,
           email,
           password_hash: hashedPassword,
-          type: "admin"
-        })
+          type: "admin",
+        });
       }
 
       const oldAdmin = await this.adminsRepository.findByUserId(user.id);
