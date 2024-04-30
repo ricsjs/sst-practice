@@ -9,7 +9,7 @@ export async function updateAdmin(
   const updateAdminBodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
-    password: z.string().min(6),
+    password: z.string().min(6).optional(),
   });
 
   try {
