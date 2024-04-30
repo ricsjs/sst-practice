@@ -7,17 +7,21 @@ export async function updateAdmin(
   reply: FastifyReply
 ) {
   const updateAdminBodySchema = z.object({
+    userId: z.string(),
     name: z.string(),
     email: z.string().email(),
     password: z.string().min(6).optional(),
   });
 
   try {
-    const { name, email, password } = updateAdminBodySchema.parse(request.body);
+    const { userId, name, email, password } = updateAdminBodySchema.parse(
+      request.body
+    );
 
     const updateAdminService = makeUpdateAdminService();
 
     await updateAdminService.execute({
+      userId,
       name,
       email,
       password,

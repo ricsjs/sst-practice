@@ -4,6 +4,7 @@ import { hash } from "bcryptjs";
 import { UsersRepository } from "../../repositories/users-repository";
 
 interface UpdateAdminServiceRequest {
+  userId: string;
   name: string;
   email: string;
   password?: string;
@@ -19,12 +20,13 @@ export class UpdateAdminService {
   ) {}
 
   async execute({
+    userId,
     name,
     email,
     password,
   }: UpdateAdminServiceRequest): Promise<UpdateAdminServiceResponse> {
     try {
-      const user = await this.usersRepository.findByEmail(email);
+      const user = await this.usersRepository.findById(userId);
 
       if (!user) {
         throw new Error("User not found!");
