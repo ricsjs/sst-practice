@@ -6,7 +6,7 @@ import { UsersRepository } from "../../repositories/users-repository";
 interface UpdateAdminServiceRequest {
   name: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 interface UpdateAdminServiceResponse {
@@ -30,13 +30,16 @@ export class UpdateAdminService {
         throw new Error("User not found!");
       }
 
-      const oldAdmin = await this.adminsRepository.findByUserId(user.id);
+      if (password) {
+        const hashedPassword = await hash(password, 6);
+        await this.usersRepository.update({
+          email,
+          password_hash: hashedPassword,
+          type: "admin"
+        })
+      }
 
-      await this.usersRepository.update({
-        email,
-        password_hash: await hash(password, 6),
-        type: "admin",
-      });
+      const oldAdmin = await this.adminsRepository.findByUserId(user.id);
 
       const updatedAdmin = await this.adminsRepository.update({
         name,
