@@ -37,6 +37,7 @@ import { verifyUserRole } from "../middlewares/verify-user-role";
 import { profile } from "../controllers/users-controllers/get-user-profile";
 import { fetchAllCards } from "../controllers/card-controllers/fetch-all-cards";
 import { fetchCardById } from "../controllers/card-controllers/fetch-card-by-id";
+import { fetchCompanyById } from "../controllers/company-controllers/fetch-company-by-id";
 
 export async function protectedRoutes(app: FastifyInstance) {
   app.addHook("onRequest", verifyJWT);
@@ -82,17 +83,17 @@ export async function protectedRoutes(app: FastifyInstance) {
     fetchAllCompanies
   );
   app.get(
-    "/companies/:id",
+    "/company/:id",
+    { onRequest: [verifyUserRole("ADMIN")] },
+    fetchCompanyById
+  );
+  app.put(
+    "/company/delete/:id",
     { onRequest: [verifyUserRole("ADMIN")] },
     deleteCompany
   );
   app.put(
-    "/companie/delete/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
-    deleteCompany
-  );
-  app.put(
-    "/companies/update/:id",
+    "/company/update/:id",
     { onRequest: [verifyUserRole("ADMIN")] },
     updateCompany
   );
