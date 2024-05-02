@@ -8,6 +8,8 @@ export async function updateCompany(
 ) {
   const updateCompanyBodySchema = z.object({
     userId: z.string(),
+    email: z.string().email(),
+    password: z.string().min(6).optional(),
     cnpj: z.string(),
     corporate_reason: z.string(),
     fantasy_name: z.string(),
@@ -28,6 +30,8 @@ export async function updateCompany(
 
     const {
       userId,
+      email,
+      password,
       cnpj,
       corporate_reason,
       fantasy_name,
@@ -44,6 +48,8 @@ export async function updateCompany(
     await updateCompanyService.execute({
       id,
       userId,
+      email,
+      password,
       cnpj,
       corporate_reason,
       fantasy_name,

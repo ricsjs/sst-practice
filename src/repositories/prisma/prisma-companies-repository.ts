@@ -16,6 +16,13 @@ export class PrismaCompaniesRepository implements CompaniesRepository {
       where: {
         id,
       },
+      include: {
+        user: {
+          select: {
+            email: true
+          }
+        }
+      },
     });
 
     return company;
@@ -25,6 +32,13 @@ export class PrismaCompaniesRepository implements CompaniesRepository {
     const company = await prisma.empresa.findFirst({
       where: {
         userId,
+      },
+      include: {
+        user: {
+          select: {
+            email: true
+          }
+        }
       },
     });
 
