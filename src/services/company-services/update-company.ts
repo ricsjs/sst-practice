@@ -45,9 +45,6 @@ export class UpdateCompanyService {
     active,
   }: UpdateCompanyServiceRequest): Promise<UpdateCompanyServiceResponse> {
     try {
-      console.log("passando aqui")
-
-      console.log("this.usersRepository:", this.usersRepository);
       
       const user = await this.usersRepository.findById(userId);
 
