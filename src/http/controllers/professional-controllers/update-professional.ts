@@ -9,6 +9,8 @@ export async function updateProfessional(
     const updateProfessionalBodySchema = z.object({
         userId: z.string(),
         name: z.string(),
+        email: z.string().email(),
+        password: z.string().min(6).optional(),
         cpf: z.string(),
         nis: z.string(),
         rg: z.string(),
@@ -32,6 +34,8 @@ export async function updateProfessional(
         const {
             userId,
             name,
+            email,
+            password,
             cpf,
             nis,
             rg,
@@ -51,6 +55,8 @@ export async function updateProfessional(
             id,
             userId,
             name,
+            email,
+            password,
             cpf,
             nis,
             rg,

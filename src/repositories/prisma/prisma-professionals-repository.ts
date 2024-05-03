@@ -25,7 +25,14 @@ export class PrismaProfessionalsRepository implements ProfesssionalsRepository {
         const professional = await prisma.profissional.findUnique({
             where: {
                 id
-            }
+            },
+            include: {
+                user: {
+                    select: {
+                        email: true
+                    }
+                }
+            },
         })
 
         return professional
@@ -35,7 +42,14 @@ export class PrismaProfessionalsRepository implements ProfesssionalsRepository {
         const professional = await prisma.profissional.findFirst({
             where: {
                 userId: userId
-            }
+            },
+            include: {
+                user: {
+                    select: {
+                        email: true
+                    }
+                }
+            },
         })
 
         return professional
