@@ -27,9 +27,10 @@ export class UpdateCompanyService {
   constructor(
     private companiesRepository: CompaniesRepository,
     private usersRepository: UsersRepository
-  ) {}
+  ) { }
 
   async execute({
+    userId,
     email,
     password,
     cnpj,
@@ -44,7 +45,11 @@ export class UpdateCompanyService {
     active,
   }: UpdateCompanyServiceRequest): Promise<UpdateCompanyServiceResponse> {
     try {
-      const user = await this.usersRepository.findByEmail(email);
+      console.log("passando aqui")
+
+      console.log("this.usersRepository:", this.usersRepository);
+      
+      const user = await this.usersRepository.findById(userId);
 
       if (!user) {
         throw new Error("User not found!");
@@ -53,9 +58,19 @@ export class UpdateCompanyService {
       if (password) {
         const hashedPassword = await hash(password, 6);
         await this.usersRepository.update({
+          id: user.id,
           email,
           password_hash: hashedPassword,
-          type: "admin"
+          type: "company"
+        })
+      }
+
+      if (!password) {
+        await this.usersRepository.update({
+          id: user.id,
+          email,
+          password_hash: user.password_hash,
+          type: "company"
         })
       }
 
@@ -78,6 +93,7 @@ export class UpdateCompanyService {
 
       return { company: updatedCompany };
     } catch (error) {
+      console.log("erro buceta", error)
       throw new Error("Error updating company: " + error);
     }
   }
