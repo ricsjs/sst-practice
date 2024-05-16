@@ -61,8 +61,8 @@ model Empresa {
   active           Boolean
   employee         Empregado[]
   Unidade          Unidade[]
-  Aso              Aso[]
   Card             Card[]
+  Documents        Documents[]
 
   @@map("empresas")
 }
@@ -111,8 +111,8 @@ model Empregado {
   phone_number String
   blood_type   String
   active       Boolean
-  Aso          Aso[]
   Card         Card[]
+  Documents    Documents[]
 
   @@map("empregados")
 }
@@ -136,13 +136,13 @@ model Profissional {
   title     String
   function  String
   active    Boolean
-  Aso       Aso[]
   Card      Card[]
+  Documents Documents[]
 
   @@map("profissionais")
 }
 
-model Aso {
+model Documents {
   id String @id @default(uuid())
 
   company   Empresa @relation(fields: [empresaId], references: [id])
@@ -154,53 +154,14 @@ model Aso {
   professional   Profissional @relation(fields: [profissionalId], references: [id])
   profissionalId String
 
-  // occupational risks
-  physical_occupational_risk     String?
-  chemical_occupational_risk     String?
-  biological_occupational_risk   String?
-  occupational_risk_of_accidents String?
-  ergonomic_occupational_risk    String?
+  name        String
+  key         String
+  contentType String
+  createdAt   DateTime @default(now())
 
-  // critical activities
-  work_at_height                        String
-  selfpropelled_machines                String
-  working_with_firearms                 String
-  confined_space                        String
-  food_handling                         String
-  electrical_installations_and_services String
-  observation                           String?
-  conclusion                            String?
+  Card Card[]
 
-  doctor_responsible String
-  local              String
-  date               DateTime
-
-  // examining doctor
-  examining_doctor_fullname String
-  examining_doctor_function String
-  examining_doctor_crm      String
-
-  // technical manager
-  technical_manager_fullname String
-  technical_manager_function String
-  technical_manager_crm      String
-
-  active Boolean
-  Exam   Exam[]
-  Card   Card[]
-
-  @@map("asos")
-}
-
-model Exam {
-  id   String   @id @default(uuid())
-  name String
-  date DateTime
-
-  aso   Aso    @relation(fields: [asoId], references: [id])
-  asoId String
-
-  @@map("exams")
+  @@map("documents")
 }
 
 model Card {
@@ -215,8 +176,8 @@ model Card {
   company   Empresa @relation(fields: [companyId], references: [id])
   companyId String
 
-  aso   Aso    @relation(fields: [asoId], references: [id])
-  asoId String
+  document    Documents @relation(fields: [documentsId], references: [id])
+  documentsId String
 
   createdAt DateTime @default(now())
 
