@@ -41,6 +41,10 @@ CREATE TABLE "documents" (
     "empresaId" TEXT NOT NULL,
     "empregadoId" TEXT NOT NULL,
     "profissionalId" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "key" TEXT NOT NULL,
+    "contentType" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "documents_pkey" PRIMARY KEY ("id")
 );
