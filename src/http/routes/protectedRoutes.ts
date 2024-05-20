@@ -37,136 +37,136 @@ export async function protectedRoutes(app: FastifyInstance) {
   app.get("/profile", profile);
   
   // document requests
-  app.post('/uploads', { onRequest: [verifyUserRole("PROFESSIONAL")] }, uploadDocument);
-  app.get('/uploads/:id', { onRequest: [verifyUserRole("PROFESSIONAL")] }, downloadDocument);
+  app.post('/uploads', { onRequest: [verifyUserRole(["PROFESSIONAL"])] }, uploadDocument);
+  app.get('/uploads/:id', { onRequest: [verifyUserRole(["PROFESSIONAL"])] }, downloadDocument);
 
   // employees requests
   app.post(
     "/employees",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     createEmployee
   );
   app.get(
     "/employees/:companyId",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY", "PROFESSIONAL"])] },
     fetchAllEmployees
   );
   app.get(
     "/employee/:id",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     fetchEmployeeById
   );
   app.put(
     "/employee/delete/:id",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     deleteEmployees
   );
   app.put(
     "/employees/update/:id",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     updateEmployees
   );
 
   // companies requests
   app.post(
     "/companies",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     createCompany
   );
   app.get(
     "/companies",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN", "PROFESSIONAL"])] },
     fetchAllCompanies
-  );
+);
   app.get(
     "/company/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     fetchCompanyById
   );
   app.put(
     "/company/delete/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     deleteCompany
   );
   app.put(
     "/company/update/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     updateCompany
   );
 
   // units requests
-  app.post("/units", { onRequest: [verifyUserRole("COMPANY")] }, createUnit);
+  app.post("/units", { onRequest: [verifyUserRole(["COMPANY"])] }, createUnit);
   app.get(
     "/units/:companyId",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     fetchAllUnits
   );
   app.get(
     "/unit/:id",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     fetchUnitById
   );
   app.put(
     "/unit/update/:id",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     updateUnit
   );
   app.put(
     "/unit/delete/:id",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     deleteUnit
   );
 
   // professionals requests
   app.post(
     "/professionals",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     createProfessional
   );
   app.get(
     "/professionals",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     fetchAllProfessionals
   );
   app.get(
     "/professional/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     fetchProfessionalById
   );
   app.put(
     "/professional/delete/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     deleteProfessional
   );
   app.put(
     "/professional/update/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     updateProfessional
   );
 
   // admin requests
-  app.post("/admins", { onRequest: [verifyUserRole("ADMIN")] }, createAdmin);
-  app.get("/admins", { onRequest: [verifyUserRole("ADMIN")] }, fetchAllAdmins);
+  app.post("/admins", { onRequest: [verifyUserRole(["ADMIN"])] }, createAdmin);
+  app.get("/admins", { onRequest: [verifyUserRole(["ADMIN"])] }, fetchAllAdmins);
   app.get(
     "/admins/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     fetchAdminById
   );
   app.put(
     "/admins/update/:id",
-    { onRequest: [verifyUserRole("ADMIN")] },
+    { onRequest: [verifyUserRole(["ADMIN"])] },
     updateAdmin
   );
 
   // cards requests
   app.get(
     "/cards/:companyId",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     fetchAllCards
   );
   app.get(
     "/card/:id",
-    { onRequest: [verifyUserRole("COMPANY")] },
+    { onRequest: [verifyUserRole(["COMPANY"])] },
     fetchCardById
   );
 }
