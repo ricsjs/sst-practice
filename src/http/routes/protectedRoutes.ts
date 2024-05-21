@@ -30,6 +30,7 @@ import { fetchCardById } from "../controllers/card-controllers/fetch-card-by-id"
 import { fetchCompanyById } from "../controllers/company-controllers/fetch-company-by-id";
 import { uploadDocument } from "../controllers/document-controllers/upload";
 import { downloadDocument } from "../controllers/document-controllers/download";
+import { fetchAllDocumentsByEmployeeId } from "../controllers/document-controllers/fetch-all-documents-by-user-id";
 
 export async function protectedRoutes(app: FastifyInstance) {
   app.addHook("onRequest", verifyJWT);
@@ -38,7 +39,8 @@ export async function protectedRoutes(app: FastifyInstance) {
   
   // document requests
   app.post('/uploads', { onRequest: [verifyUserRole(["PROFESSIONAL"])] }, uploadDocument);
-  app.get('/uploads/:id', { onRequest: [verifyUserRole(["PROFESSIONAL"])] }, downloadDocument);
+  app.get('/document/:id', { onRequest: [verifyUserRole(["PROFESSIONAL"])] }, downloadDocument);
+  app.get('/documents/:employeeId', { onRequest: verifyUserRole(["COMPANY"]) }, fetchAllDocumentsByEmployeeId);
 
   // employees requests
   app.post(
