@@ -39,7 +39,7 @@ export async function protectedRoutes(app: FastifyInstance) {
   
   // document requests
   app.post('/uploads', { onRequest: [verifyUserRole(["PROFESSIONAL"])] }, uploadDocument);
-  app.get('/document/:id', { onRequest: [verifyUserRole(["PROFESSIONAL"])] }, downloadDocument);
+  app.get('/document/:id', { onRequest: [verifyUserRole(["PROFESSIONAL", "COMPANY"])] }, downloadDocument);
   app.get('/documents/:employeeId', { onRequest: verifyUserRole(["COMPANY"]) }, fetchAllDocumentsByEmployeeId);
 
   // employees requests
