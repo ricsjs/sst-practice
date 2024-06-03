@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { makeUpdateCompanyService } from "../../../services/factories/company-factories/make-update-company";
+import { customDateSchema } from "../../../../utils/convert-date";
 
 export async function updateCompany(
   request: FastifyRequest,
@@ -18,7 +19,7 @@ export async function updateCompany(
     address: z.string(),
     neighborhood: z.string(),
     phone: z.string(),
-    dt_start_esocial: z.coerce.date(),
+    dt_start_esocial: customDateSchema,
   });
 
   const updateCompanyParamSchema = z.object({
