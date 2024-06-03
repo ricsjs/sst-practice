@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 import { ResourceNotFoundError } from "../../../services/errors/resource-not-found-error"
 import { makeUpdateEmployeesService } from "../../../services/factories/employee-factories/make-update-employee-service"
+import { customDateSchema } from "../../../../utils/convert-date"
 
 export async function updateEmployees(request: FastifyRequest, reply: FastifyReply) {
     const updateEmployeesBodySchema = z.object({
@@ -11,7 +12,7 @@ export async function updateEmployees(request: FastifyRequest, reply: FastifyRep
         rg: z.string(),
         br_pdh: z.string(),
         sex: z.string(),
-        dt_birth: z.coerce.date(),
+        dt_birth: customDateSchema,
         phone: z.string(),
         phone_number: z.string(),
         blood_type: z.string(),

@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { makeCreateEmployeeService } from "../../../services/factories/employee-factories/make-create-employee-service";
 import { UnableToRegisterError } from "../../../services/errors/unable-to-register-error";
+import { customDateSchema } from "../../../../utils/convert-date";
 
 export async function createEmployee(
   request: FastifyRequest,
@@ -15,7 +16,7 @@ export async function createEmployee(
     rg: z.string(),
     br_pdh: z.string(),
     sex: z.string(),
-    dt_birth: z.coerce.date(),
+    dt_birth: customDateSchema,
     phone: z.string(),
     phone_number: z.string(),
     blood_type: z.string(),

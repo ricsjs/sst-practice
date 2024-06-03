@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { UserAlreadyExistsError } from "../../../services/errors/user-already-exists-error";
 import { makeCreateCompanyService } from "../../../services/factories/company-factories/make-create-company-service";
+import { customDateSchema } from "../../../../utils/convert-date";
 
 export async function createCompany(
   request: FastifyRequest,
@@ -18,7 +19,7 @@ export async function createCompany(
     address: z.string(),
     neighborhood: z.string(),
     phone: z.string(),
-    dt_start_esocial: z.coerce.date(),
+    dt_start_esocial: customDateSchema,
   });
 
   const {
