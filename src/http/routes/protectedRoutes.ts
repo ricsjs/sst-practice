@@ -55,7 +55,7 @@ export async function protectedRoutes(app: FastifyInstance) {
   );
   app.get(
     "/employee/:id",
-    { onRequest: [verifyUserRole(["COMPANY"])] },
+    { onRequest: [verifyUserRole(["COMPANY", "PROFESSIONAL"])] },
     fetchEmployeeById
   );
   app.put(
@@ -82,7 +82,7 @@ export async function protectedRoutes(app: FastifyInstance) {
 );
   app.get(
     "/company/:id",
-    { onRequest: [verifyUserRole(["ADMIN"])] },
+    { onRequest: [verifyUserRole(["ADMIN", "PROFESSIONAL"])] },
     fetchCompanyById
   );
   app.put(
