@@ -17,6 +17,8 @@ CREATE TABLE "usuarios" (
 CREATE TABLE "admins" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "cpf" TEXT NOT NULL,
+    "phone_number" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
 
     CONSTRAINT "admins_pkey" PRIMARY KEY ("id")
@@ -46,21 +48,19 @@ CREATE TABLE "unidades" (
     "companyId" TEXT NOT NULL,
     "identification" TEXT NOT NULL,
     "cnpj" TEXT NOT NULL,
-    "cnea" TEXT NOT NULL,
+    "cnae" TEXT NOT NULL,
     "activity" TEXT NOT NULL,
     "degree_of_risk" TEXT NOT NULL,
-    "aso" TEXT NOT NULL,
     "cep" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "neighborhood" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "reference_contact" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "legal_representative" TEXT NOT NULL,
     "cpf_legal_representative" TEXT NOT NULL,
-    "cipa_type" TEXT NOT NULL,
-    "num_employees_cipa" INTEGER NOT NULL,
     "active" BOOLEAN NOT NULL,
 
     CONSTRAINT "unidades_pkey" PRIMARY KEY ("id")
@@ -74,13 +74,19 @@ CREATE TABLE "empregados" (
     "cpf" TEXT NOT NULL,
     "nis" TEXT NOT NULL,
     "rg" TEXT NOT NULL,
-    "br_pdh" TEXT NOT NULL,
+    "pcd" TEXT NOT NULL,
+    "pcd_observation" TEXT NOT NULL,
     "sex" TEXT NOT NULL,
     "dt_birth" TIMESTAMP(3) NOT NULL,
-    "phone" TEXT NOT NULL,
     "phone_number" TEXT NOT NULL,
-    "blood_type" TEXT NOT NULL,
+    "admission_dt" TIMESTAMP(3) NOT NULL,
+    "function_start_dt" TIMESTAMP(3) NOT NULL,
+    "office" TEXT NOT NULL,
+    "employee_function" TEXT NOT NULL,
+    "registration" TEXT NOT NULL,
+    "sector" TEXT NOT NULL,
     "active" BOOLEAN NOT NULL,
+    "cbo" TEXT NOT NULL,
 
     CONSTRAINT "empregados_pkey" PRIMARY KEY ("id")
 );
@@ -91,16 +97,13 @@ CREATE TABLE "profissionais" (
     "userId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
-    "nis" TEXT NOT NULL,
     "rg" TEXT NOT NULL,
-    "cbo" TEXT NOT NULL,
     "formation" TEXT NOT NULL,
     "organ" TEXT NOT NULL,
     "acronym" TEXT NOT NULL,
-    "ccr" TEXT NOT NULL,
     "uf" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "function" TEXT NOT NULL,
+    "phone_number" TEXT NOT NULL,
     "active" BOOLEAN NOT NULL,
 
     CONSTRAINT "profissionais_pkey" PRIMARY KEY ("id")
