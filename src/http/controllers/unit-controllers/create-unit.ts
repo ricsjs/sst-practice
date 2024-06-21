@@ -8,24 +8,22 @@ export async function createUnit(request: FastifyRequest, reply: FastifyReply) {
         companyId: z.string(),
         identification: z.string(),
         cnpj: z.string(),
-        cnea: z.string(),
+        cnae: z.string(),
         activity: z.string(),
         degree_of_risk: z.string(),
-        aso: z.string(),
         cep: z.string(),
         address: z.string(),
         neighborhood: z.string(),
         city: z.string(),
         state: z.string(),
         email: z.string().email(),
+        reference_contact: z.string(),
         phone: z.string(),
         legal_representative: z.string(),
         cpf_legal_representative: z.string(),
-        cipa_type: z.string(),
-        num_employees_cipa: z.number()
     })
 
-    const { companyId, identification, cnpj, cnea, activity, degree_of_risk, aso, cep, address, neighborhood, city, state, email, phone, legal_representative, cpf_legal_representative, cipa_type, num_employees_cipa } = createUnitSchema.parse(request.body)
+    const { companyId, identification, cnpj, cnae, activity, degree_of_risk, cep, address, neighborhood, city, state, email, reference_contact, phone, legal_representative, cpf_legal_representative } = createUnitSchema.parse(request.body)
 
     try {
 
@@ -35,21 +33,19 @@ export async function createUnit(request: FastifyRequest, reply: FastifyReply) {
             companyId,
             identification,
             cnpj,
-            cnea,
+            cnae,
             activity,
             degree_of_risk,
-            aso,
             cep,
             address,
             neighborhood,
             city,
             state,
             email,
+            reference_contact,
             phone,
             legal_representative,
             cpf_legal_representative,
-            cipa_type,
-            num_employees_cipa,
             active: true
         })
     } catch (error) {

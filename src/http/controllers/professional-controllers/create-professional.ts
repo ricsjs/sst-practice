@@ -9,19 +9,16 @@ export async function createProfessional(request: FastifyRequest, reply: Fastify
         password: z.string().min(6),
         name: z.string(),
         cpf: z.string(),  
-        nis: z.string(),
         rg: z.string(),
-        cbo: z.string(),
         formation: z.string(),
         organ: z.string(),
         acronym: z.string(),
-        ccr: z.string(),
         uf: z.string(),
         title: z.string(),
-        jobFunction: z.string()
+        phone_number: z.string(),
     })
 
-    const { email, password, name, cpf, nis, rg, cbo, formation, organ, acronym, ccr, uf, title, jobFunction } = createProfessionalSchema.parse(request.body)
+    const { email, password, name, cpf, rg, formation, organ, acronym, uf, title, phone_number } = createProfessionalSchema.parse(request.body)
 
     try {
 
@@ -32,16 +29,13 @@ export async function createProfessional(request: FastifyRequest, reply: Fastify
             password,
             name,
             cpf,
-            nis,
             rg,
-            cbo,
             formation,
             organ,
             acronym,
-            ccr,
             uf,
             title,
-            jobFunction,
+            phone_number,
             active: true
         })
     } catch (error) {

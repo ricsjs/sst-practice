@@ -34,8 +34,10 @@ model User {
 }
 
 model Admin {
-  id   String @id @default(uuid())
-  name String
+  id           String @id @default(uuid())
+  name         String
+  cpf          String
+  phone_number String
 
   user   User   @relation(fields: [userId], references: [id])
   userId String
@@ -74,21 +76,19 @@ model Unidade {
 
   identification           String
   cnpj                     String
-  cnea                     String
+  cnae                     String
   activity                 String
   degree_of_risk           String
-  aso                      String
   cep                      String
   address                  String
   neighborhood             String
   city                     String
   state                    String
   email                    String
+  reference_contact        String
   phone                    String
   legal_representative     String
   cpf_legal_representative String
-  cipa_type                String
-  num_employees_cipa       Int
   active                   Boolean
 
   @@map("unidades")
@@ -100,19 +100,25 @@ model Empregado {
   company   Empresa @relation(fields: [companyId], references: [id])
   companyId String
 
-  name         String
-  cpf          String
-  nis          String
-  rg           String
-  br_pdh       String
-  sex          String
-  dt_birth     DateTime
-  phone        String
-  phone_number String
-  blood_type   String
-  active       Boolean
-  Card         Card[]
-  Documents    Documents[]
+  name              String
+  cpf               String
+  nis               String
+  rg                String
+  pcd               String
+  pcd_observation   String
+  sex               String
+  dt_birth          DateTime
+  phone_number      String
+  admission_dt      DateTime
+  function_start_dt DateTime
+  office            String
+  employee_function String
+  registration      String
+  sector            String
+  active            Boolean
+  cbo               String
+  Card              Card[]
+  Documents         Documents[]
 
   @@map("empregados")
 }
@@ -123,21 +129,18 @@ model Profissional {
   user   User   @relation(fields: [userId], references: [id])
   userId String
 
-  name      String
-  cpf       String
-  nis       String
-  rg        String
-  cbo       String
-  formation String
-  organ     String
-  acronym   String
-  ccr       String
-  uf        String
-  title     String
-  function  String
-  active    Boolean
-  Card      Card[]
-  Documents Documents[]
+  name         String
+  cpf          String
+  rg           String
+  formation    String
+  organ        String
+  acronym      String
+  uf           String
+  title        String
+  phone_number String
+  active       Boolean
+  Card         Card[]
+  Documents    Documents[]
 
   @@map("profissionais")
 }

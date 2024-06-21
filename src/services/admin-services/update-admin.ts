@@ -7,6 +7,8 @@ interface UpdateAdminServiceRequest {
   userId: string;
   name: string;
   email: string;
+  cpf: string;
+  phone_number: string;
   password?: string;
 }
 
@@ -23,6 +25,8 @@ export class UpdateAdminService {
     userId,
     name,
     email,
+    cpf,
+    phone_number,
     password,
   }: UpdateAdminServiceRequest): Promise<UpdateAdminServiceResponse> {
     try {
@@ -55,6 +59,8 @@ export class UpdateAdminService {
 
       const updatedAdmin = await this.adminsRepository.update({
         name,
+        cpf,
+        phone_number,
         userId: user.id,
         id: oldAdmin!.id,
       });

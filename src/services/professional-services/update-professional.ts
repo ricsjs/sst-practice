@@ -10,17 +10,14 @@ interface UpdateProfessionalServiceRequest {
     email: string,
     password?: string,
     cpf: string;
-    nis: string;
     rg: string;
-    cbo: string;
     formation: string;
     organ: string;
     acronym: string;
-    ccr: string;
     uf: string;
     title: string;
-    professionalFunction: string
     active: boolean
+    phone_number: string
 }
 
 interface UpdateProfessionalServiceResponse {
@@ -39,16 +36,13 @@ export class UpdateProfessionalService {
         email,
         password,
         cpf,
-        nis,
         rg,
-        cbo,
         formation,
         organ,
         acronym,
-        ccr,
         uf,
         title,
-        professionalFunction,
+        phone_number,
         active
     }: UpdateProfessionalServiceRequest): Promise<UpdateProfessionalServiceResponse> {
         try {
@@ -83,17 +77,14 @@ export class UpdateProfessionalService {
             const updatedProfessional = await this.professionalsRepository.update({
                 name,
                 cpf,
-                nis,
                 rg,
-                cbo,
                 formation,
                 organ,
                 acronym,
-                ccr,
                 uf,
                 title,
-                function: professionalFunction,
                 active,
+                phone_number,
                 id: oldProfessional!.id,
                 userId: user.id
             });

@@ -5,7 +5,7 @@ interface CreateCardServiceRequest {
     professionalId: string
     employeeId: string
     companyId: string
-    asoId: string
+    documentId: string
 }
 
 interface CreateCardServiceResponse {
@@ -18,13 +18,13 @@ export class CreateCardService {
     ) { }
 
     async execute({
-        professionalId, employeeId, companyId, asoId
+        professionalId, employeeId, companyId, documentId
     }: CreateCardServiceRequest): Promise<CreateCardServiceResponse> {
         const card = await this.cardsRepository.create({
             professional: { connect: { id: professionalId } },
             employee: { connect: { id: employeeId } },
             company: { connect: { id: companyId } },
-            aso: { connect: { id: asoId } },
+            document: { connect: { id: documentId } },
         })
 
         return { card }

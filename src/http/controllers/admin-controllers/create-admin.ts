@@ -10,10 +10,12 @@ export async function createAdmin(
   const createAdminSchema = z.object({
     name: z.string(),
     email: z.string().email(),
+    cpf: z.string(),
+    phone_number: z.string(),
     password: z.string().min(6),
   });
 
-  const { name, email, password } = createAdminSchema.parse(request.body);
+  const { name, email, cpf, phone_number, password } = createAdminSchema.parse(request.body);
 
   try {
     const createAdminService = makeCreateAdminService();
@@ -21,6 +23,8 @@ export async function createAdmin(
     await createAdminService.execute({
       name,
       email,
+      cpf,
+      phone_number,
       password,
     });
   } catch (error) {

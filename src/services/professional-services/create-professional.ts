@@ -9,16 +9,13 @@ interface CreateProfessionalServiceRequest {
     password: string
     name: string
     cpf: string
-    nis: string
     rg: string
-    cbo: string
     formation: string
     organ: string
     acronym: string
-    ccr: string
     uf: string
     title: string
-    jobFunction: string
+    phone_number: string
     active: boolean
 }
 
@@ -33,7 +30,7 @@ export class CreateProfessionalService {
     ) { }
 
     async execute({
-        email, password, name, cpf, nis, rg, cbo, formation, organ, acronym, ccr, uf, title, jobFunction, active
+        email, password, name, cpf, rg, formation, organ, acronym, uf, title, phone_number, active
     }: CreateProfessionalServiceRequest): Promise<CreateProfessionalServiceResponse> {
         const password_hash = await hash(password, 6)
 
@@ -56,17 +53,14 @@ export class CreateProfessionalService {
         const professional = await this.professionalsRepository.create({
             name,
             cpf,
-            nis,
             rg,
-            cbo,
             formation,
             organ,
             acronym,
-            ccr,
             uf,
             title,
-            function: jobFunction,
             active,
+            phone_number,
             user: { connect: { id: user.id } }
         })
 

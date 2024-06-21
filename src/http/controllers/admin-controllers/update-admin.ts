@@ -10,11 +10,13 @@ export async function updateAdmin(
     userId: z.string(),
     name: z.string(),
     email: z.string().email(),
+    cpf: z.string(),
+    phone_number: z.string(),
     password: z.string().min(6).optional(),
   });
 
   try {
-    const { userId, name, email, password } = updateAdminBodySchema.parse(
+    const { userId, name, email, cpf, phone_number, password } = updateAdminBodySchema.parse(
       request.body
     );
 
@@ -24,6 +26,8 @@ export async function updateAdmin(
       userId,
       name,
       email,
+      cpf,
+      phone_number,
       password,
     });
 

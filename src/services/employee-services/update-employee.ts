@@ -1,55 +1,82 @@
-import { Empregado } from "@prisma/client"
-import { EmployeesRepository } from "../../repositories/employees-repository"
+import { Empregado } from "@prisma/client";
+import { EmployeesRepository } from "../../repositories/employees-repository";
 
 interface UpdateEmployeeServiceRequest {
-    id: string
-    name: string
-    cpf: string
-    nis: string
-    rg: string
-    br_pdh: string
-    sex: string
-    dt_birth: Date
-    phone: string
-    phone_number: string
-    blood_type: string
-    companyId: string
-    active: boolean
+  id: string;
+  name: string;
+  cpf: string;
+  nis: string;
+  rg: string;
+  pcd: string;
+  pcd_observation: string;
+  sex: string;
+  dt_birth: Date;
+  phone_number: string;
+  admission_dt: Date;
+  function_start_dt: Date;
+  office: string;
+  employee_function: string;
+  registration: string;
+  sector: string;
+  cbo: string;
+  companyId: string;
+  active: boolean;
 }
 
 interface UpdateEmployeeServiceResponse {
-    employee: Empregado
+  employee: Empregado;
 }
 
 export class UpdateEmployeesService {
-    constructor(
-        private employeesRepository: EmployeesRepository,
-    ) { }
+  constructor(private employeesRepository: EmployeesRepository) {}
 
-    async execute({
-        id, name, cpf, nis, rg, br_pdh, sex, dt_birth, phone, phone_number, blood_type, companyId, active
-    }: UpdateEmployeeServiceRequest): Promise<UpdateEmployeeServiceResponse> {
-        try {
+  async execute({
+    id,
+    name,
+    cpf,
+    nis,
+    rg,
+    pcd,
+    pcd_observation,
+    sex,
+    dt_birth,
+    phone_number,
+    admission_dt,
+    function_start_dt,
+    office,
+    employee_function,
+    registration,
+    sector,
+    cbo,
+    active,
+    companyId,
+  }: UpdateEmployeeServiceRequest): Promise<UpdateEmployeeServiceResponse> {
+    try {
+      const updatedEmployee = await this.employeesRepository.update({
+        id,
+        name,
+        cpf,
+        nis,
+        rg,
+        pcd,
+        pcd_observation,
+        sex,
+        dt_birth,
+        phone_number,
+        admission_dt,
+        function_start_dt,
+        office,
+        employee_function,
+        registration,
+        sector,
+        cbo,
+        active,
+        companyId,
+      });
 
-            const updatedEmployee = await this.employeesRepository.update({
-                id,
-                name,
-                cpf,
-                nis,
-                rg,
-                br_pdh,
-                sex,
-                dt_birth,
-                phone,
-                phone_number,
-                blood_type,
-                companyId,
-                active
-            })
-
-            return { employee: updatedEmployee }
-        } catch (error) {
-            throw new Error("Error updating employee: " + error)
-        }
+      return { employee: updatedEmployee };
+    } catch (error) {
+      throw new Error("Error updating employee: " + error);
     }
+  }
 }

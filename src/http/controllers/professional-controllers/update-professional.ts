@@ -12,16 +12,13 @@ export async function updateProfessional(
         email: z.string().email(),
         password: z.string().min(6).optional(),
         cpf: z.string(),
-        nis: z.string(),
         rg: z.string(),
-        cbo: z.string(),
         formation: z.string(),
         organ: z.string(),
         acronym: z.string(),
-        ccr: z.string(),
         uf: z.string(),
         title: z.string(),
-        professionalFunction: z.string()
+        phone_number: z.string(),
     });
 
     const updateProfessionalParamSchema = z.object({
@@ -37,16 +34,13 @@ export async function updateProfessional(
             email,
             password,
             cpf,
-            nis,
             rg,
-            cbo,
             formation,
             organ,
             acronym,
-            ccr,
             uf,
             title,
-            professionalFunction
+            phone_number,
         } = updateProfessionalBodySchema.parse(request.body);
 
         const updateProfessionalService = makeUpdateProfessionalService();
@@ -58,16 +52,13 @@ export async function updateProfessional(
             email,
             password,
             cpf,
-            nis,
             rg,
-            cbo,
             formation,
             organ,
             acronym,
-            ccr,
             uf,
             title,
-            professionalFunction,
+            phone_number,
             active: true,
         });
 

@@ -8,6 +8,8 @@ interface CreateAdminServiceRequest {
     name: string,
     email: string,
     password: string
+    cpf: string
+    phone_number: string
 }
 
 interface CreateAdminServiceResponse {
@@ -21,7 +23,7 @@ export class CreateAdminService {
     ) { }
 
     async execute({
-        name, email, password
+        name, email, cpf, phone_number, password
     }: CreateAdminServiceRequest): Promise<CreateAdminServiceResponse> {
         const password_hash = await hash(password, 6)
 
@@ -43,6 +45,8 @@ export class CreateAdminService {
 
         const admin = await this.adminsRepository.create({
             name,
+            cpf,
+            phone_number,
             user: { connect: { id: user.id } }
         })
 

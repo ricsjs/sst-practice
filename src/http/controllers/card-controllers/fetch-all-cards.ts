@@ -1,5 +1,4 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { makeFetchAllAsoService } from "../../../services/factories/aso-factories/make-fetch-all-asos";
 import { z } from "zod";
 import { makeFetchAllCardsService } from "../../../services/factories/card-factories/make-fetch-all-cards";
 
