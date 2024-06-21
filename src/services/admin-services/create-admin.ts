@@ -7,8 +7,8 @@ import { UsersRepository } from "../../repositories/users-repository"
 interface CreateAdminServiceRequest {
     name: string,
     email: string,
-    password: string
-    cpf: string
+    password: string,
+    cpf: string,
     phone_number: string
 }
 
