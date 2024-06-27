@@ -12,6 +12,9 @@ const customDateSchema = z.string()
   }, {
     message: "Data deve estar no formato DD-MM-AAAA"
   })
-  .transform(date => convertDate(date));
+  .transform(date => {
+    console.log("Date string before conversion:", date); // Adicionando log para depuração
+    return convertDate(date);
+  });
 
 export { customDateSchema };
