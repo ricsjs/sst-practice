@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const convertDate = (dateString: string) => {
   const [day, month, year] = dateString.split("-").map(Number);
-  return new Date(Date.UTC(year, month - 1, day));
+  return new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
 };
 
 const customDateSchema = z
