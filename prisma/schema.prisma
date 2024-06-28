@@ -90,7 +90,7 @@ model Unidade {
   legal_representative     String
   cpf_legal_representative String
   active                   Boolean
-  Empregado                Empregado[]
+  employee                 Empregado[]
 
   @@map("unidades")
 }
@@ -101,8 +101,8 @@ model Empregado {
   company   Empresa @relation(fields: [companyId], references: [id])
   companyId String
 
-  unit      Unidade @relation(fields: [unidadeId], references: [id])
-  unidadeId String
+  unit   Unidade @relation(fields: [unitId], references: [id])
+  unitId String
 
   name              String
   cpf               String
