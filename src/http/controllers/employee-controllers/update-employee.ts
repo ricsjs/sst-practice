@@ -26,7 +26,7 @@ export async function updateEmployees(
     sector: z.string(),
     cbo: z.string(),
     companyId: z.string(),
-    unitId: z.string(),
+    unitId: z.string().optional(),
   });
 
   const updateEmployeesParamSchema = z.object({

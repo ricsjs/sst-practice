@@ -101,8 +101,8 @@ model Empregado {
   company   Empresa @relation(fields: [companyId], references: [id])
   companyId String
 
-  unit   Unidade @relation(fields: [unitId], references: [id])
-  unitId String
+  unit   Unidade? @relation(fields: [unitId], references: [id])
+  unitId String?
 
   name              String
   cpf               String
