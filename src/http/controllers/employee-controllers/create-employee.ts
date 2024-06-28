@@ -10,6 +10,7 @@ export async function createEmployee(
 ) {
   const createEmployeeSchema = z.object({
     companyId: z.string(),
+    unitId: z.string(),
     name: z.string(),
     cpf: z.string(),
     nis: z.string(),
@@ -30,6 +31,7 @@ export async function createEmployee(
 
   const {
     companyId,
+    unitId,
     name,
     cpf,
     nis,
@@ -53,6 +55,7 @@ export async function createEmployee(
 
     await createEmployeeService.execute({
       companyId,
+      unitId,
       name,
       cpf,
       nis,
