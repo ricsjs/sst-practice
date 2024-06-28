@@ -31,6 +31,7 @@ import { fetchCompanyById } from "../controllers/company-controllers/fetch-compa
 import { uploadDocument } from "../controllers/document-controllers/upload";
 import { downloadDocument } from "../controllers/document-controllers/download";
 import { fetchAllDocumentsByEmployeeId } from "../controllers/document-controllers/fetch-all-documents-by-user-id";
+import { fetchAllEmployeesByUnitId } from "../controllers/employee-controllers/fetch-all-employees-by-unit-id";
 
 export async function protectedRoutes(app: FastifyInstance) {
   app.addHook("onRequest", verifyJWT);
@@ -52,6 +53,11 @@ export async function protectedRoutes(app: FastifyInstance) {
     "/employees/:companyId",
     { onRequest: [verifyUserRole(["COMPANY", "PROFESSIONAL"])] },
     fetchAllEmployees
+  );
+  app.get(
+    "/employees/unit/:unitId",
+    { onRequest: [verifyUserRole(["COMPANY", "PROFESSIONAL"])] },
+    fetchAllEmployeesByUnitId
   );
   app.get(
     "/employee/:id",

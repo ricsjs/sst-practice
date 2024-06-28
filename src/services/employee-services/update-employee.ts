@@ -20,6 +20,7 @@ interface UpdateEmployeeServiceRequest {
   sector: string;
   cbo: string;
   companyId: string;
+  unitId: string;
   active: boolean;
 }
 
@@ -50,6 +51,7 @@ export class UpdateEmployeesService {
     cbo,
     active,
     companyId,
+    unitId,
   }: UpdateEmployeeServiceRequest): Promise<UpdateEmployeeServiceResponse> {
     try {
       const updatedEmployee = await this.employeesRepository.update({
@@ -72,6 +74,7 @@ export class UpdateEmployeesService {
         cbo,
         active,
         companyId,
+        unidadeId: unitId
       });
 
       return { employee: updatedEmployee };

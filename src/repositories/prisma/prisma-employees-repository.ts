@@ -45,6 +45,17 @@ export class PrismaEmployeesRepository implements EmployeesRepository {
         return employees;
     }
 
+    async findManyByUnitId(unitId: string): Promise<Empregado[]> {
+        const employees = await prisma.empregado.findMany({
+            where: {
+                unidadeId: unitId,
+                active: true
+            }
+        });
+
+        return employees;
+    }
+
     async create(data: Prisma.EmpregadoCreateInput) {
         const employee = await prisma.empregado.create({
             data,

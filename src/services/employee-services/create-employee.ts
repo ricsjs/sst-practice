@@ -19,6 +19,7 @@ interface CreateEmployeeServiceRequest {
     sector: string
     cbo: string
     companyId: string
+    unitId: string
     active: boolean
 }
 
@@ -32,7 +33,7 @@ export class CreateEmployeeService {
     ) { }
 
     async execute({
-        name, cpf, nis, rg, pcd, pcd_observation, sex, dt_birth, phone_number, admission_dt, function_start_dt, office, employee_function, registration, sector, cbo, active, companyId
+        name, cpf, nis, rg, pcd, pcd_observation, sex, dt_birth, phone_number, admission_dt, function_start_dt, office, employee_function, registration, sector, cbo, active, companyId, unitId
     }: CreateEmployeeServiceRequest): Promise<CreateEmployeeServiceResponse> {
 
         const employee = await this.employeesRepository.create({
@@ -53,7 +54,8 @@ export class CreateEmployeeService {
             sector,
             cbo,
             active,
-            company: { connect: { id: companyId } }
+            company: { connect: { id: companyId } },
+            unit: { connect: { id: unitId } }
         })
 
         return {
