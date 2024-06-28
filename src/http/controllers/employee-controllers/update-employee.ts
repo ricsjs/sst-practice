@@ -26,6 +26,7 @@ export async function updateEmployees(
     sector: z.string(),
     cbo: z.string(),
     companyId: z.string(),
+    unitId: z.string(),
   });
 
   const updateEmployeesParamSchema = z.object({
@@ -53,6 +54,7 @@ export async function updateEmployees(
       sector,
       cbo,
       companyId,
+      unitId,
     } = updateEmployeesBodySchema.parse(request.body);
 
     console.log("Received data:", request.body); // Adicionando log para depuração
@@ -78,6 +80,7 @@ export async function updateEmployees(
       sector,
       cbo,
       companyId,
+      unitId,
       active: true,
     });
 
