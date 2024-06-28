@@ -74,7 +74,7 @@ export class UpdateEmployeesService {
         cbo,
         active,
         companyId,
-        unidadeId: unitId
+        unitId: unitId
       });
 
       return { employee: updatedEmployee };
