@@ -61,6 +61,7 @@ export class PrismaEmployeesRepository implements EmployeesRepository {
             data,
         })
 
+        console.log("AQUI ESTÃO OS DADOS", data);
         return employee
     }
 }

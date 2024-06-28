@@ -19,7 +19,7 @@ interface CreateEmployeeServiceRequest {
   sector: string;
   cbo: string;
   companyId: string;
-  unitId: string; // Utilize o campo correto para o relacionamento com a unidade
+  unitId: string;
   active: boolean;
 }
 
@@ -49,10 +49,8 @@ export class CreateEmployeeService {
     cbo,
     active,
     companyId,
-    unitId, // Ajuste aqui para usar o campo correto
+    unitId,
   }: CreateEmployeeServiceRequest): Promise<CreateEmployeeServiceResponse> {
-    console.log("companyId:", companyId);
-    console.log("unitId:", unitId);
     
     const employee = await this.employeesRepository.create({
       name,
