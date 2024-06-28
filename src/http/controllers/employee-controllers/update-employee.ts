@@ -57,8 +57,6 @@ export async function updateEmployees(
       unitId,
     } = updateEmployeesBodySchema.parse(request.body);
 
-    console.log("Received data:", request.body); // Adicionando log para depuração
-
     const updateEmployeeService = makeUpdateEmployeesService();
 
     await updateEmployeeService.execute({

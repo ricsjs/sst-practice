@@ -50,6 +50,9 @@ export async function createEmployee(
     cbo,
   } = createEmployeeSchema.parse(request.body);
 
+  console.log("Parsed companyId:", companyId);
+  console.log("Parsed unitId:", unitId);
+
   try {
     const createEmployeeService = makeCreateEmployeeService();
 
