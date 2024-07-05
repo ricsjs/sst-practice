@@ -7,7 +7,9 @@ const envSchema = z.object({
     PORT: z.coerce.number().default(3333),
     CLOUDFLARE_ENDPOINT: z.string().url(),
     CLOUDFLARE_ACCESS_KEY_ID: z.string(),
-    CLOUDFLARE_SECRET_ACCESS_KEY: z.string()
+    CLOUDFLARE_SECRET_ACCESS_KEY: z.string(),
+    RESEND_API_KEY: z.string(),
+    RESEND_EMAIL_SEND: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

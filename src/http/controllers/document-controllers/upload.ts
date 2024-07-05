@@ -5,6 +5,8 @@ import { FastifyRequest } from "fastify";
 import { z } from "zod";
 import { r2 } from "../../../lib/cloudflare";
 import { prisma } from "../../../lib/prisma";
+import { resend } from "../../../mail/client";
+import { env } from "../../../env";
 
 export const uploadDocument = async (request: FastifyRequest) => {
   const uploadBodySchema = z.object({
@@ -39,6 +41,27 @@ export const uploadDocument = async (request: FastifyRequest) => {
       profissionalId: professionalId
     }
   });
+
+  const companyUserEmail = await prisma.empresa.findUnique({
+    where: { id: companyId },
+    select: {
+      user: {
+        select: { email: true }
+      }
+    }
+  })
+
+  if (companyUserEmail?.user?.email) {
+      const { data } = await resend.emails.send({
+        from: env.RESEND_EMAIL_SEND,
+        to: [companyUserEmail.user.email],
+        subject: 'Novo documento Cadastrado',
+        html: '<p>Um novo documento foi cadastrado para a sua empresa.</p>',
+      });
+      return data;
+  } else {
+    console.error('E-mail do usuário da empresa não encontrado.');
+  }
 
   return { signedUrl, fileId: file.id };
 }
