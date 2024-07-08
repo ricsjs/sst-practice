@@ -10,6 +10,7 @@ const envSchema = z.object({
     CLOUDFLARE_SECRET_ACCESS_KEY: z.string(),
     RESEND_API_KEY: z.string(),
     RESEND_EMAIL_SEND: z.string(),
+    RESEND_SITE_DOMAIN: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)
