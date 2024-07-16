@@ -17,7 +17,7 @@ const generateSignedDownloadUrl = async (
     Key: fileKey,
   });
 
-  const signedUrl = await getSignedUrl(r2, command, { expiresIn: 600 }); // URL expira em 1 hora
+  const signedUrl = await getSignedUrl(r2, command, { expiresIn: 14400 }); // URL expira em 1 hora
 
   return signedUrl;
 };
@@ -26,12 +26,13 @@ export const uploadDocument = async (request: FastifyRequest) => {
   const uploadBodySchema = z.object({
     name: z.string().min(1),
     contentType: z.string().regex(/\w+\/[-+.\w]+/),
+    medicalConfidentiality: z.boolean(),
     companyId: z.string(),
     employeeId: z.string(),
     professionalId: z.string(),
   });
 
-  const { name, contentType, companyId, employeeId, professionalId } =
+  const { name, contentType, medicalConfidentiality, companyId, employeeId, professionalId } =
     uploadBodySchema.parse(request.body);
 
   const fileKey = randomUUID().concat("-").concat(name);
@@ -55,6 +56,7 @@ export const uploadDocument = async (request: FastifyRequest) => {
       data: {
         name,
         contentType,
+        medicalConfidentiality,
         key: fileKey,
         empresaId: companyId,
         empregadoId: employeeId,
@@ -91,7 +93,7 @@ export const uploadDocument = async (request: FastifyRequest) => {
       fileKey
     );
 
-    if (companyUserEmail?.user?.email) {
+    if (companyUserEmail?.user?.email && medicalConfidentiality === false) {
       const { data } = await resend.emails.send({
         from: env.RESEND_EMAIL_SEND,
         to: [companyUserEmail.user.email],
@@ -110,7 +112,7 @@ export const uploadDocument = async (request: FastifyRequest) => {
             <p>
               <a href="sst-practice-front-end.vercel.app" style="display: inline-block; padding: 10px 20px; color: #fff; background-color: #157a8c; text-decoration: none; border-radius: 5px;">Acessar Sistema</a>
             </p>
-            <p>Ou você pode acessar o documento diretamente pelo link abaixo:</p>
+            <p>Ou você pode acessar o documento diretamente pelo link temporário abaixo (expira em 24 horas):</p>
             <p>
               <a href="${downloadUrl}" target="_blank" style="color: #157a8c; text-decoration: underline;">Acessar Documento</a>
             </p>

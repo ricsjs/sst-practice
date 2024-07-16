@@ -161,10 +161,11 @@ model Documents {
   professional   Profissional @relation(fields: [profissionalId], references: [id])
   profissionalId String
 
-  name        String
-  key         String
-  contentType String
-  createdAt   DateTime @default(now())
+  name                   String
+  key                    String
+  contentType            String
+  createdAt              DateTime @default(now())
+  medicalConfidentiality Boolean
 
   Card Card[]
 

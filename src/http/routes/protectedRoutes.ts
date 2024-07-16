@@ -32,6 +32,7 @@ import { uploadDocument } from "../controllers/document-controllers/upload";
 import { downloadDocument } from "../controllers/document-controllers/download";
 import { fetchAllDocumentsByEmployeeId } from "../controllers/document-controllers/fetch-all-documents-by-user-id";
 import { fetchAllEmployeesByUnitId } from "../controllers/employee-controllers/fetch-all-employees-by-unit-id";
+import { fetchAllDocumentsWithMedicalConfidentialityByEmployeeId } from "../controllers/document-controllers/fetch-all-documents-with-medical-confidentiality-by-user-id";
 
 export async function protectedRoutes(app: FastifyInstance) {
   app.addHook("onRequest", verifyJWT);
@@ -42,6 +43,7 @@ export async function protectedRoutes(app: FastifyInstance) {
   app.post('/uploads', { onRequest: [verifyUserRole(["PROFESSIONAL"])] }, uploadDocument);
   app.get('/document/:id', { onRequest: [verifyUserRole(["PROFESSIONAL", "COMPANY"])] }, downloadDocument);
   app.get('/documents/:employeeId', { onRequest: verifyUserRole(["COMPANY"]) }, fetchAllDocumentsByEmployeeId);
+  app.get('/sigilalDocuments/:employeeId', { onRequest: verifyUserRole(["PROFESSIONAL", "ADMIN"]) }, fetchAllDocumentsWithMedicalConfidentialityByEmployeeId)
 
   // employees requests
   app.post(
