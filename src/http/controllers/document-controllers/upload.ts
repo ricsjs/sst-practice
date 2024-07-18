@@ -94,6 +94,7 @@ export const uploadDocument = async (request: FastifyRequest) => {
     );
 
     if (companyUserEmail?.user?.email && medicalConfidentiality === false) {
+      console.log("sigilo médico", medicalConfidentiality)
       const { data } = await resend.emails.send({
         from: env.RESEND_EMAIL_SEND,
         to: [companyUserEmail.user.email],
@@ -124,7 +125,7 @@ export const uploadDocument = async (request: FastifyRequest) => {
 
       console.log("E-mail enviado:", data);
     } else {
-      console.error("E-mail do usuário da empresa não encontrado.");
+      console.error("E-mail da empresa não encontrado ou documento é de sigilo médico");
     }
 
     return { signedUrl, fileId: file.id };
