@@ -165,7 +165,7 @@ model Documents {
   key                    String
   contentType            String
   createdAt              DateTime @default(now())
-  medicalConfidentiality Boolean
+  medicalConfidentiality Boolean  @default(true)
 
   Card Card[]
 
