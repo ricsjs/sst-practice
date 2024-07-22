@@ -130,7 +130,7 @@ export const uploadDocument = async (request: FastifyRequest) => {
 
     return { signedUrl, fileId: file.id };
   } catch (error) {
-    console.error("Erro ao enviar documento:", error);
+    console.error("Erro ao fazer upload do documento:", error);
     throw error;
   }
 };
